@@ -1,408 +1,103 @@
-<!-- Top Header Banner -->
-<header class="bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-800 text-white shadow-lg sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-3">
-        <div class="flex items-center space-x-3 space-x-reverse">
-            <div class="bg-white/10 p-2.5 rounded-2xl backdrop-blur-md border border-white/20">
-                <span class="text-2xl">🌿</span>
-            </div>
-            <div>
-                <h1 class="text-lg md:text-xl font-black tracking-wide">المستشار الزراعي السيادي</h1>
-                <p class="text-xs text-emerald-100 opacity-90">نظام التدقيق والرقابة على المبيدات (v2.0)</p>
-            </div>
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المستشار الزراعي - تدقيق المبيدات والقرارات السيادية</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+    <header class="bg-emerald-800 text-white shadow-lg p-4 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-black">🌱 المستشار الزراعي (النسخة الميدانية)</h1>
+            <span class="text-xs bg-emerald-950 px-3 py-1 rounded-full border border-emerald-600">أوفلاين بالكامل</span>
         </div>
-        
-        <!-- Navigation Tabs -->
-        <nav class="flex items-center gap-1.5 bg-emerald-900/40 p-1.5 rounded-2xl border border-emerald-600/30 overflow-x-auto max-w-full">
-            <button onclick="switchTab('search')" id="btn-search" class="px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold transition-all duration-200 bg-white text-emerald-900 shadow-sm flex items-center gap-1.5 whitespace-nowrap">
-                <span>🔍</span> الفحص والبحث
-            </button>
-            <button onclick="switchTab('ocr')" id="btn-ocr" class="px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold transition-all duration-200 text-white hover:bg-white/10 flex items-center gap-1.5 whitespace-nowrap">
-                <span>📷</span> التعرف البصري
-            </button>
-            <button onclick="switchTab('admin')" id="btn-admin" class="px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold transition-all duration-200 text-white hover:bg-white/10 flex items-center gap-1.5 whitespace-nowrap">
-                <span>⚙️</span> تحديث البيانات
-            </button>
-            <button onclick="switchTab('about')" id="btn-about" class="px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold transition-all duration-200 text-white hover:bg-white/10 flex items-center gap-1.5 whitespace-nowrap">
-                <span>👤</span> عن المطور
-            </button>
-        </nav>
-    </div>
-</header>
+    </header>
 
-<!-- Main Container -->
-<main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6">
-
-    <!-- TAB 1: SEARCH & AUDIT -->
-    <section id="tab-search" class="space-y-6">
-        <!-- Motto Card -->
-        <div class="bg-gradient-to-br from-emerald-800 to-teal-700 text-white p-6 md:p-8 rounded-3xl bento-shadow text-center relative overflow-hidden">
-            <div class="absolute -left-10 -bottom-10 text-emerald-900/20 text-9xl font-black select-none pointer-events-none">🌿</div>
-            <h2 class="text-xl md:text-3xl font-black mb-2 tracking-tight">«على قدر المعرفة تأتي المسؤولية»</h2>
-            <p class="text-sm md:text-base text-emerald-100 max-w-2xl mx-auto font-medium">نظام التدقيق السيادي للمبيدات والمواد الفعالة بدولة ليبيا (القرار 500 لسنة 2026 والقرار 248 لسنة 2024)</p>
+    <main class="max-w-4xl mx-auto p-4 space-y-6 mt-4">
+        <!-- البحث الميداني -->
+        <div class="glass-card text-slate-900 p-6 rounded-2xl shadow-xl">
+            <h2 class="text-lg font-bold mb-3 text-emerald-900">🔍 التدقيق الفوري للمبيدات والقرارات</h2>
+            <input type="text" id="searchInput" placeholder="اكتب اسم المادة الفعالة أو المبيد (مثال: أبامكتين)..." class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-600 outline-none">
+            <div id="searchResult" class="mt-4"></div>
         </div>
 
-        <!-- Search Bar & Controls -->
-        <div class="liquid-glass p-5 md:p-6 rounded-3xl bento-shadow grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-            <div class="md:col-span-2 relative">
-                <label for="searchInput" class="block text-xs font-bold text-slate-600 mb-1.5">أدخل اسم المبيد، المادة الفعالة، أو رقم CAS:</label>
-                <div class="relative">
-                    <span class="absolute right-4 top-3.5 text-slate-400 text-lg">🔍</span>
-                    <input type="text" id="searchInput" oninput="handleSearch()" placeholder="مثال: Abamectin أو 71751-41-2 أو DDT..." class="w-xl w-full pr-12 pl-4 py-3 rounded-2xl border border-slate-200 bg-white/80 focus:outline-none focus:ring-2 focus:ring-emerald-600 text-sm font-medium placeholder:text-slate-400 shadow-inner">
-                </div>
-            </div>
-            <div>
-                <label for="modeSelect" class="block text-xs font-bold text-slate-600 mb-1.5">طريقة العرض:</label>
-                <select id="modeSelect" onchange="handleSearch()" class="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white/80 focus:outline-none focus:ring-2 focus:ring-emerald-600 text-sm font-medium shadow-inner">
-                    <option value="pro">الوضع المحترف (Professional Mode)</option>
-                    <option value="farmer">وضع المزارع البسيط (Farmer Mode)</option>
-                </select>
-            </div>
+        <!-- لوحة التحكم وتحديث البيانات (Admin JSON Sync) -->
+        <div class="glass-card text-slate-900 p-6 rounded-2xl shadow-xl border border-amber-500">
+            <h2 class="text-lg font-bold mb-2 text-amber-900">⚙️ لوحة المشرف (تحديث قاعدة البيانات محلياً)</h2>
+            <p class="text-xs text-slate-600 mb-3">قم برفع ملف JSON لتحديث قاعدة المبيدات والقرارات (القرار 248 لسنة 2024 والقرار 500 لسنة 2026) دون الحاجة لتعديل الكود.</p>
+            <input type="file" id="jsonUpload" accept=".json" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100">
+            <button onclick="importJSON()" class="mt-3 bg-amber-600 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-amber-700">تحديث القاعدة محلياً</button>
         </div>
+    </main>
 
-        <!-- Search Results Area -->
-        <div id="searchResults" class="space-y-4">
-            <div class="liquid-glass p-8 rounded-3xl bento-shadow text-center text-slate-500">
-                <p class="text-4xl mb-3">💡</p>
-                <p class="font-bold text-base">ابدأ بكتابة اسم المادة أو المبيد في خانة البحث أعلاه للتحقق الفوري.</p>
-                <p class="text-xs text-slate-400 mt-1">يعمل النظام محلياً بالكامل (Offline-First) مع ضمان مطابقة السجلات الرسمية.</p>
-            </div>
-        </div>
-    </section>
+    <script>
+        // قاعدة البيانات الافتراضية الأولية (القرارات السيادية والمبيدات)
+        const defaultDB = [
+            { name: "أبامكتين", status: "مصرح", decree: "القرار 248 لسنة 2024", notes: "يُستخدم ضمن الضوابط المحددة." },
+            { name: "كلوربيريفوس", status: "محظور", decree: "القرار 500 لسنة 2026", notes: "محظور نهائياً لأسباب بيئية وصحية." }
+        ];
 
-    <!-- TAB 2: OCR & CAMERA SCAN -->
-    <section id="tab-ocr" class="space-y-6 hidden">
-        <div class="liquid-glass p-6 md:p-8 rounded-3xl bento-shadow space-y-4 text-center">
-            <div class="bg-emerald-100 text-emerald-800 w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto shadow-sm">📷</div>
-            <h2 class="text-2xl font-black text-slate-800">محرك التعرف البصري على الملصقات (OCR)</h2>
-            <p class="text-sm text-slate-600 max-w-xl mx-auto">قم برفع صورة ملصق العبوة أو بطاقة البيان الزراعية لاستخراج المادة الفعالة ومطابقتها فوراً مع السجلات السيادية دون الحاجة للإنترنت.</p>
-            
-            <div class="border-2 border-dashed border-slate-300 hover:border-emerald-600 rounded-3xl p-8 transition-all bg-white/50 cursor-pointer relative max-w-xl mx-auto" onclick="document.getElementById('ocrFile').click()">
-                <input type="file" id="ocrFile" accept="image/*" class="hidden" onchange="processOCRImage(event)">
-                <div id="ocrUploadPrompt">
-                    <span class="text-4xl block mb-2">📁</span>
-                    <span class="font-bold text-slate-700 text-sm">اضغط لاختيار صورة الملصق أو اسحبها هنا</span>
-                    <p class="text-xs text-slate-400 mt-1">PNG, JPG, JPEG (معالجة محلية بالكامل)</p>
-                </div>
-                <div id="ocrPreviewContainer" class="hidden space-y-3">
-                    <img id="ocrImagePreview" class="max-h-64 mx-auto rounded-xl shadow-md object-contain" alt="معاينة الملصق">
-                    <p class="text-xs text-emerald-700 font-bold">تم إرفاق الصورة بنجاح - جارٍ الفحص...</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- OCR Results Container -->
-        <div id="ocrResultArea"></div>
-    </section>
-
-    <!-- TAB 3: ADMIN & OFFLINE SYNC -->
-    <section id="tab-admin" class="space-y-6 hidden">
-        <div class="liquid-glass p-6 md:p-8 rounded-3xl bento-shadow space-y-6">
-            <div class="flex items-center space-x-3 space-x-reverse border-b border-slate-200 pb-4">
-                <span class="text-3xl">⚙️</span>
-                <div>
-                    <h2 class="text-xl md:text-2xl font-black text-slate-800">لوحة إدارة وقواعد البيانات (Offline Sync)</h2>
-                    <p class="text-xs text-slate-500">تحديث السجلات المحلية والقرارات الوزارية دون الحاجة لتعديل الكود البرمجي</p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="dbStatsCards">
-                <!-- Stats injected via JS -->
-            </div>
-
-            <div class="bg-white/80 p-6 rounded-2xl border border-slate-200 space-y-4">
-                <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
-                    <span>📥</span> استيراد حزمة تحديث قواعد البيانات (JSON)
-                </h3>
-                <p class="text-xs text-slate-600 leading-relaxed">
-                    عند صدور تحديثات دورية للقرارات الوزارية، قم برفع ملف الـ JSON المحدث أدناه لتحديث الذاكرة المحلية للتطبيق فوراً على هاتفك أو جهازك الميداني.
-                </p>
-                <div class="flex flex-wrap items-center gap-3">
-                    <input type="file" id="jsonImportFile" accept=".json" class="block w-full md:w-auto text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer">
-                    <button onclick="importJSONDatabase()" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition shadow-md">
-                        تحديث قاعدة البيانات الآن
-                    </button>
-                </div>
-                <div id="importStatus" class="text-xs font-bold mt-2"></div>
-            </div>
-
-            <div class="bg-amber-50 border border-amber-200 p-4 rounded-2xl text-amber-800 text-xs flex items-start gap-3">
-                <span class="text-lg">⚠️</span>
-                <div>
-                    <span class="font-bold block mb-0.5">ملاحظة سيادية هامة:</span>
-                    البيانات المخزنة محلياً تحافظ على سلامة السجلات وفقاً للقرارات الرسمية للدولة الليبية دون أي اعتماد على خوادم خارجية تضمن استمرارية العمل في المناطق النائية.
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TAB 4: ABOUT & DEVELOPER PROFILE -->
-    <section id="tab-about" class="space-y-6 hidden">
-        <div class="liquid-glass p-6 md:p-10 rounded-3xl bento-shadow max-w-3xl mx-auto space-y-6 text-center border-t-8 border-emerald-700">
-            <div class="inline-block bg-emerald-100 text-emerald-800 px-4 py-1.5 rounded-full text-xs font-bold mb-2">
-                النسخة الرسمية المعتمدة v2.0 (سبتمبر 2026)
-            </div>
-            <h2 class="text-2xl md:text-3xl font-black text-slate-900">المستشار الزراعي | Agricultural Advisor</h2>
-            <p class="text-emerald-700 font-bold text-lg">«على قدر المعرفة تأتي المسؤولية»</p>
-            
-            <hr class="border-slate-200 my-4">
-
-            <div class="space-y-2">
-                <p class="text-xs text-slate-500 font-bold uppercase tracking-wider">الجهة الإشرافية والتطوير الهندسي</p>
-                <h3 class="text-xl md:text-2xl font-black text-slate-900">م . أبوبكر عبدالقادر الطشاني</h3>
-                <p class="text-sm font-bold text-slate-700">مهندس بقطاع الزراعة والثروة الحيوانية – درنة</p>
-                <p class="text-xs text-slate-500">استشاري هندسي وخبير قانوني معتمد في الرقابة على المبيدات الزراعية والتشريعات السيادية بدولة ليبيا.</p>
-            </div>
-
-            <div class="bg-emerald-50/70 p-5 rounded-2xl border border-emerald-100 text-right space-y-2 text-xs text-slate-700">
-                <p class="font-bold text-emerald-900 text-sm">📌 مميزات المنظومة المعمارية:</p>
-                <ul class="list-disc list-inside space-y-1">
-                    <li><b>تشغيل أوفلاين تام (Offline-First):</b> لا يتطلب أي اتصال بالإنترنت أثناء العمل الميداني.</li>
-                    <li><b>حماية صارمة ضد الهلوسة:</b> حد أدنى للثقة $\ge 80\%$ لعرض النتائج ومطابقة الـ CAS.</li>
-                    <li><b>سيادة تشريعية مطلقة:</b> الأولوية المطلقة لقرارات وزارة الزراعة الليبية (القرار 500 و القرار 248).</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-</main>
-
-<!-- Footer -->
-<footer class="mt-auto py-6 text-center text-xs text-slate-400 border-t border-slate-200 bg-white/50">
-    جميع الحقوق محفوظة © 2026 - نظام المستشار الزراعي السيادي في ليبيا 🌿
-</footer>
-
-<!-- JavaScript Application Logic -->
-<script>
-    // Default Sovereign & International Databases (Embedded Offline-First)
-    const DEFAULT_DB = {
-        version: "v2.0-Sept2026-OfflineCache",
-        libya_500: [
-            { id: 1, trade_name: "أبامكتين 1.8% EC", active_ingredient: "Abamectin", cas_number: "71751-41-2", crop: "خضروات وقثائيات", status: "مرخص" },
-            { id: 2, trade_name: "سيمباس 20% EC", active_ingredient: "Cypermethrin", cas_number: "52315-07-8", crop: "محاصيل حقلية وأشجار ثمار", status: "مرخص" },
-            { id: 3, trade_name: "مداستر 20% SL", active_ingredient: "Imidacloprid", cas_number: "138261-41-3", crop: "خضروات", status: "مرخص" },
-            { id: 4, trade_name: "دلتامكس 2.5% EC", active_ingredient: "Deltamethrin", cas_number: "52918-63-5", crop: "أشجار الفاكهة", status: "مرخص" }
-        ],
-        libya_248: [
-            { id: 1, active_ingredient: "DDT", cas_number: "50-29-3", reason: "مبيد محظور دولياً ومحلياً لثباته البيئي العالي وتراكمه الحشوي", status: "محظور نهائياً" },
-            { id: 2, active_ingredient: "Lindane", cas_number: "58-89-9", reason: "مادة مسرطنة ومحظورة بموجب اتفاقية ستوكهولم والقرار 248", status: "محظور نهائياً" },
-            { id: 3, active_ingredient: "Paraquat", cas_number: "4685-14-1", reason: "سمية حادة عالية وعدم وجود ترياق علاجي فعال", status: "محظور نهائياً" },
-            { id: 4, active_ingredient: "Carbofuran", cas_number: "1563-66-2", reason: "شديد السمية للطيور والنحل والكائنات الحية النافعة", status: "محظور نهائياً" }
-        ],
-        usa_epa: [
-            { active_ingredient: "Abamectin", cas_number: "71751-41-2", epa_reg: "USA-EPA-71751", status: "Registered (USA)" },
-            { active_ingredient: "Glyphosate", cas_number: "1071-83-6", epa_reg: "USA-EPA-1071", status: "Registered (Restricted Use)" }
-        ],
-        eu_db: [
-            { active_ingredient: "Abamectin", cas_number: "71751-41-2", eu_status: "Approved under Regulation (EC) No 1107/2009" },
-            { active_ingredient: "Paraquat", cas_number: "4685-14-1", eu_status: "Non-approved / Withdrawn" }
-        ]
-    };
-
-    // Initialize LocalStorage if not exists
-    function initStorage() {
-        if (!localStorage.getItem('al_mustashar_db')) {
-            localStorage.setItem('al_mustashar_db', JSON.stringify(DEFAULT_DB));
-        }
-    }
-
-    function getDB() {
-        initStorage();
-        try {
-            return JSON.parse(localStorage.getItem('al_mustashar_db'));
-        } catch (e) {
-            return DEFAULT_DB;
-        }
-    }
-
-    // Tab Switching Logic
-    function switchTab(tabId) {
-        ['search', 'ocr', 'admin', 'about'].forEach(t => {
-            document.getElementById('tab-' + t).classList.add('hidden');
-            document.getElementById('btn-' + t).className = "px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold transition-all duration-200 text-white hover:bg-white/10 flex items-center gap-1.5 whitespace-nowrap";
-        });
-        document.getElementById('tab-' + tabId).classList.remove('hidden');
-        document.getElementById('btn-' + tabId).className = "px-3.5 py-2 rounded-xl text-xs md:text-sm font-bold transition-all duration-200 bg-white text-emerald-900 shadow-sm flex items-center gap-1.5 whitespace-nowrap";
-        
-        if (tabId === 'admin') {
-            renderAdminStats();
-        }
-    }
-
-    // Search & Audit Engine
-    function handleSearch() {
-        const query = document.getElementById('searchInput').value.trim().toLowerCase();
-        const mode = document.getElementById('modeSelect').value;
-        const resultsContainer = document.getElementById('searchResults');
-        
-        if (!query) {
-            resultsContainer.innerHTML = `
-                <div class="liquid-glass p-8 rounded-3xl bento-shadow text-center text-slate-500">
-                    <p class="text-4xl mb-3">💡</p>
-                    <p class="font-bold text-base">ابدأ بكتابة اسم المادة أو المبيد في خانة البحث أعلاه للتحقق الفوري.</p>
-                    <p class="text-xs text-slate-400 mt-1">يعمل النظام محلياً بالكامل (Offline-First) مع ضمان مطابقة السجلات الرسمية.</p>
-                </div>
-            `;
-            return;
-        }
-
-        const db = getDB();
-
-        // Filter Prohibited (Decree 248)
-        const prohibitedMatches = db.libya_248.filter(item => 
-            item.active_ingredient.toLowerCase().includes(query) || 
-            item.cas_number.toLowerCase().includes(query)
-        );
-
-        // Filter Approved (Decree 500)
-        const approvedMatches = db.libya_500.filter(item => 
-            item.trade_name.toLowerCase().includes(query) || 
-            item.active_ingredient.toLowerCase().includes(query) || 
-            item.cas_number.toLowerCase().includes(query)
-        );
-
-        let html = '';
-
-        if (prohibitedMatches.length === 0 && approvedMatches.length === 0) {
-            html = `
-                <div class="liquid-glass p-6 rounded-3xl bento-shadow border-l-8 border-yellow-500 space-y-2">
-                    <h4 class="font-bold text-yellow-700 text-base">⚠️ تنبيه محرك منع الهلوسة (Anti-Hallucination Engine)</h4>
-                    <p class="text-sm text-slate-700">لم يتم العثور على تطابق موثوق بدرجة <b>80% أو أعلى</b> في السجلات السيادية المعتمدة لهذا المدخل.</p>
-                    <p class="text-xs text-slate-500">تذكير قانوني: غياب المادة في القوائم المعتمدة لا يعني أبداً التصريح باستخدامها.</p>
-                </div>
-            `;
-        } else {
-            // Render Prohibited Matches (Absolute Priority)
-            prohibitedMatches.forEach(row => {
-                html += `
-                    <div class="liquid-glass p-6 rounded-3xl bento-shadow border-l-8 border-red-600 space-y-3">
-                        <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs font-bold inline-block">محظور نهائياً (القرار 248 لسنة 2024)</span>
-                        <h3 class="text-xl font-black text-red-900">المادة الفعالة: ${row.active_ingredient}</h3>
-                        <p class="text-xs text-slate-600"><b>رقم CAS:</b> <code class="bg-slate-100 px-2 py-0.5 rounded">${row.cas_number}</code></p>
-                        <p class="text-sm text-slate-700"><b>السبب التنظيمي والحظر:</b> ${row.reason}</p>
-                    </div>
-                `;
-            });
-
-            // Render Approved Matches (Decree 500)
-            approvedMatches.forEach(row => {
-                html += `
-                    <div class="liquid-glass p-6 rounded-3xl bento-shadow border-l-8 border-emerald-600 space-y-3">
-                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs font-bold inline-block">مصرح ومسجل (القرار 500 لسنة 2026)</span>
-                        <h3 class="text-xl font-black text-emerald-900">الاسم التجاري: ${row.trade_name}</h3>
-                        <p class="text-xs text-slate-600"><b>المادة الفعالة:</b> ${row.active_ingredient} | <b>رقم CAS:</b> <code class="bg-slate-100 px-2 py-0.5 rounded">${row.cas_number}</code></p>
-                        <p class="text-sm text-slate-700"><b>المحاصيل والآفات المصرح بها:</b> ${row.crop}</p>
-                `;
-
-                if (mode === 'pro') {
-                    const usaRes = db.usa_epa.find(u => u.cas_number === row.cas_number);
-                    const euRes = db.eu_db.find(e => e.cas_number === row.cas_number);
-
-                    html += `
-                        <hr class="border-slate-200 my-3">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-                            <div class="bg-white/80 p-3 rounded-xl border border-slate-200 text-xs">
-                                <p class="font-bold text-slate-800 mb-1">🇺🇸 وكالة حماية البيئة الأمريكية (EPA)</p>
-                                <p class="text-slate-600">${usaRes ? `مُسجل: ${usaRes.epa_reg} (${usaRes.status})` : 'لا توجد مطابقة مباشرة في عينة EPA.'}</p>
-                            </div>
-                            <div class="bg-white/80 p-3 rounded-xl border border-slate-200 text-xs">
-                                <p class="font-bold text-slate-800 mb-1">🇪🇺 الاتحاد الأوروبي (EU)</p>
-                                <p class="text-slate-600">${euRes ? `الحالة: ${euRes.eu_status}` : 'لا توجد مطابقة مباشرة في عينة الاتحاد الأوروبي.'}</p>
-                            </div>
-                        </div>
-                    `;
-                }
-
-                html += `</div>`;
-            });
-        }
-
-        resultsContainer.innerHTML = html;
-    }
-
-    // OCR Simulation Engine
-    function processOCRImage(event) {
-        const file = event.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('ocrUploadPrompt').classList.add('hidden');
-            const previewContainer = document.getElementById('ocrPreviewContainer');
-            previewContainer.classList.remove('hidden');
-            document.getElementById('ocrImagePreview').src = e.target.result;
-
-            setTimeout(() => {
-                const ocrResultArea = document.getElementById('ocrResultArea');
-                ocrResultArea.innerHTML = `
-                    <div class="liquid-glass p-6 rounded-3xl bento-shadow border-l-8 border-emerald-600 space-y-3">
-                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs font-bold inline-block">مطابقة مؤكدة عبر الـ OCR (القرار 500 لسنة 2026)</span>
-                        <h3 class="text-xl font-black text-emerald-900">المادة المستخرجة: Abamectin</h3>
-                        <p class="text-xs text-slate-600"><b>رقم CAS:</b> <code class="bg-slate-100 px-2 py-0.5 rounded">71751-41-2</code> | <b>درجة ثقة الـ OCR:</b> <span class="text-emerald-700 font-bold">94%</span> (أعلى من حد الثقة 80%)</p>
-                        <p class="text-sm text-slate-700"><b>الحالة التنظيمية:</b> المادة مصرحة ومسجلة للاستخدام الزراعي وفق السجلات المعتمدة في دولة ليبيا.</p>
-                    </div>
-                `;
-            }, 1200);
-        };
-        reader.readAsDataURL(file);
-    }
-
-    // Admin & Database Sync
-    function renderAdminStats() {
-        const db = getDB();
-        const statsContainer = document.getElementById('dbStatsCards');
-        statsContainer.innerHTML = `
-            <div class="bg-white/80 p-4 rounded-2xl border border-slate-200 text-center shadow-sm">
-                <p class="text-xs text-slate-500 font-bold">قرار 500 (المصرحة)</p>
-                <p class="text-2xl font-black text-emerald-700 mt-1">${db.libya_500.length} سجل</p>
-            </div>
-            <div class="bg-white/80 p-4 rounded-2xl border border-slate-200 text-center shadow-sm">
-                <p class="text-xs text-slate-500 font-bold">قرار 248 (المحظورة)</p>
-                <p class="text-2xl font-black text-red-600 mt-1">${db.libya_248.length} سجل</p>
-            </div>
-            <div class="bg-white/80 p-4 rounded-2xl border border-slate-200 text-center shadow-sm">
-                <p class="text-xs text-slate-500 font-bold">عينة EPA الأمريكية</p>
-                <p class="text-2xl font-black text-blue-700 mt-1">${db.usa_epa.length} سجل</p>
-            </div>
-            <div class="bg-white/80 p-4 rounded-2xl border border-slate-200 text-center shadow-sm">
-                <p class="text-xs text-slate-500 font-bold">عينة الاتحاد الأوروبي</p>
-                <p class="text-2xl font-black text-teal-700 mt-1">${db.eu_db.length} سجل</p>
-            </div>
-        `;
-    }
-
-    function importJSONDatabase() {
-        const fileInput = document.getElementById('jsonImportFile');
-        const statusDiv = document.getElementById('importStatus');
-        
-        if (!fileInput.files || fileInput.files.length === 0) {
-            statusDiv.className = "text-xs font-bold mt-2 text-red-600";
-            statusDiv.innerText = "❌ الرجاء اختيار ملف JSON صالح أولاً.";
-            return;
-        }
-
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-        
-        reader.onload = function(e) {
-            try {
-                const parsedData = JSON.parse(e.target.result);
-                if (!parsedData.libya_500 || !parsedData.libya_248) {
-                    throw new Error("ملف غير مطابق للهيكل المطلوب");
-                }
-                localStorage.setItem('al_mustashar_db', JSON.stringify(parsedData));
-                statusDiv.className = "text-xs font-bold mt-2 text-emerald-600";
-                statusDiv.innerText = "✅ تم استيراد وتحديث قاعدة البيانات المحلية بنجاح وكفاءة تامة!";
-                renderAdminStats();
-            } catch (err) {
-                statusDiv.className = "text-xs font-bold mt-2 text-red-600";
-                statusDiv.innerText = "❌ خطأ في قراءة الملف: تأكد من صحة تنسيق الـ JSON.";
+        // تهيئة التخزين المحلي
+        function initDB() {
+            if (!localStorage.getItem('pesticides_db')) {
+                localStorage.setItem('pesticides_db', JSON.stringify(defaultDB));
             }
-        };
-        reader.readAsText(file);
-    }
+        }
+        initDB();
 
-    // Initialize on Load
-    window.onload = function() {
-        initStorage();
-    };
-</script>
+        // عملية البحث
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const query = e.target.value.trim().toLowerCase();
+            const db = JSON.parse(localStorage.getItem('pesticides_db') || '[]');
+            const resultDiv = document.getElementById('searchResult');
+            
+            if (!query) {
+                resultDiv.innerHTML = '';
+                return;
+            }
+
+            const match = db.find(item => item.name.toLowerCase().includes(query));
+            if (match) {
+                const badgeColor = match.status === 'مصرح' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
+                resultDiv.innerHTML = `
+                    <div class="p-4 rounded-xl border ${badgeColor}">
+                        <p class="font-bold text-base">المادة: ${match.name}</p>
+                        <p class="text-sm font-semibold mt-1">الحالة القانونية: ${match.status}</p>
+                        <p class="text-xs mt-1">السند: ${match.decree} - ${match.notes}</p>
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `<div class="p-3 bg-slate-100 text-slate-700 rounded-xl text-sm">لم يتم العثور على مطابقة دقيقة داخل قاعدة البيانات المحلية. يرجى التحقق من اسم المادة.</div>`;
+            }
+        });
+
+        // استيراد وتحديث قاعدة البيانات من ملف JSON
+        function importJSON() {
+            const fileInput = document.getElementById('jsonUpload');
+            if (fileInput.files.length === 0) {
+                alert('الرجاء اختيار ملف JSON أولاً.');
+                return;
+            }
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const jsonData = JSON.parse(e.target.result);
+                    localStorage.setItem('pesticides_db', JSON.stringify(jsonData));
+                    alert('تم تحديث قاعدة البيانات بنجاح محلياً!');
+                } catch (err) {
+                    alert('ملف JSON غير صالح أو تالف.');
+                }
+            };
+            reader.readAsText(file);
+        }
+    </script>
+</body>
+</html>
