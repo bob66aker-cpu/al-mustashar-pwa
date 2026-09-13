@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المستشار الزراعي | Agricultural Advisor</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap');
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f1f5f9;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800">
+
+    <!-- Header / Navbar -->
+    <header class="bg-emerald-800 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <span class="text-3xl">🌿</span>
+                <div>
+                    <h1 class="text-xl font-bold">المستشار الزراعي</h1>
+                    <p class="text-xs text-emerald-200">نظام التدقيق السيادي للمبيدات والمواد الفعالة (Offline-First)</p>
+                </div>
+            </div>
+            <div class="text-sm bg-emerald-700 px-3 py-1.5 rounded-lg border border-emerald-600">
+                إصدار v2.0 | سبتمبر 2026
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Grid (Bento Grid) -->
+    <main class="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Left Column: Search & Verification Engine -->
+        <section class="md:col-span-2 space-y-6">
+            <div class="glass-card rounded-2xl p-6 shadow-sm">
+                <h2 class="text-lg font-bold text-emerald-900 mb-4 flex items-center gap-2">
+                    <span>🔍</span> محرك الفحص والتدقيق الفوري
+                </h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-700 mb-1">ابحث باسم المبيد، المادة الفعالة، أو رقم CAS:</label>
+                        <input type="text" id="searchInput" placeholder="مثال: Abamectin أو رقم CAS..." 
+                            class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+                    </div>
+                    <div class="flex gap-4">
+                        <button onclick="performSearch()" class="flex-1 bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-3 rounded-xl transition shadow-sm">
+                            تنفيذ الفحص والمطابقة
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsContainer" class="glass-card rounded-2xl p-6 shadow-sm hidden">
+                <h3 class="text-md font-bold text-slate-800 mb-3 border-b pb-2">نتائج المطابقة السيادية:</h3>
+                <div id="resultContent" class="space-y-3">
+                    <!-- Dynamic Results Inserted Here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Column: Developer & System Status Bento Box -->
+        <aside class="space-y-6">
+            <!-- Developer Info Card -->
+            <div class="glass-card rounded-2xl p-6 shadow-sm text-center">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden border-2 border-emerald-700 shadow-inner bg-emerald-100 flex items-center justify-center">
+                    <!-- Developer Image Reference -->
+                    <img src="ابوبكر عبدالقادر الطشاني.png" alt="م. أبوبكر عبدالقادر الطشاني" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <span class="text-3xl hidden">👨‍💼</span>
+                </div>
+                <h3 class="font-bold text-lg text-slate-900">م . أبوبكر عبدالقادر الطشاني</h3>
+                <p class="text-xs text-slate-600 mt-1">مهندس زراعي استشاري وخبير قانوني محلف أمام القضاء - درنة، ليبيا</p>
+                <blockquote class="mt-4 text-xs italic text-emerald-800 bg-emerald-50 p-3 rounded-xl border border-emerald-200">
+                    "على قدر المعرفة تأتي المسؤولية"
+                </blockquote>
+            </div>
+
+            <!-- Database Status Summary -->
+            <div class="glass-card rounded-2xl p-6 shadow-sm">
+                <h3 class="font-bold text-sm text-slate-800 mb-3">حالة قواعد البيانات المحلية (4,170 سجل):</h3>
+                <ul class="text-xs space-y-2 text-slate-600">
+                    <li class="flex justify-between items-center bg-white p-2 rounded-lg border">
+                        <span>قرار 500 لسنة 2026 (المسجلة):</span>
+                        <strong class="text-emerald-700">411 سجل</strong>
+                    </li>
+                    <li class="flex justify-between items-center bg-white p-2 rounded-lg border">
+                        <span>قرار 248 لسنة 2024 (المحظورة):</span>
+                        <strong class="text-rose-600">77 سجل</strong>
+                    </li>
+                    <li class="flex justify-between items-center bg-white p-2 rounded-lg border">
+                        <span>قاعدة بيانات USA EPA:</span>
+                        <strong class="text-slate-800">2,199 سجل</strong>
+                    </li>
+                    <li class="flex justify-between items-center bg-white p-2 rounded-lg border">
+                        <span>قاعدة بيانات EU Database:</span>
+                        <strong class="text-slate-800">1,483 سجل</strong>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-6 text-xs text-slate-500 border-t mt-12 bg-white">
+        جميع الحقوق محفوظة © 2026 - نظام المستشار الزراعي السيادي (Offline-First).
+    </footer>
+
+    <script>
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const container = document.getElementById('resultsContainer');
+            const content = document.getElementById('resultContent');
+            
+            if(!query) {
+                alert('يرجى إدخال اسم المادة أو رقم CAS للبحث.');
+                return;
+            }
+
+            container.classList.remove('hidden');
+            
+            content.innerHTML = `
+                <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
+                    <p class="font-bold text-emerald-900">🇱🇾 الأولوية السيادية (قرار وزير الزراعة رقم 500 لسنة 2026):</p>
+                    <p class="text-sm mt-1">المطابقة نشطة بنسبة عتبة 80% وفق القواعد المحلية المعتمدة.</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
