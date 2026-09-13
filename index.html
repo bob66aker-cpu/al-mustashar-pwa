@@ -4,43 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المستشار الزراعي - تدقيق المبيدات والقرارات السيادية</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Tajawal', sans-serif; }
-        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; min-height: 100vh; padding-bottom: 40px; }
+        header { background-color: #065f46; color: white; padding: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); position: sticky; top: 0; z-index: 50; }
+        .container { max-width: 800px; margin: 20px auto; padding: 0 15px; }
+        .card { background: rgba(255, 255, 255, 0.95); color: #0f172a; border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .card h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 12px; color: #065f46; }
+        input[type="text"], input[type="file"] { width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 1rem; margin-top: 8px; outline: none; }
+        input[type="text"]:focus { border-color: #059669; box-shadow: 0 0 0 3px rgba(5,150,105,0.2); }
+        button { background-color: #d97706; color: white; border: none; padding: 10px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; transition: background 0.2s; }
+        button:hover { background-color: #b45309; }
+        .badge-allowed { background-color: #d1fae5; color: #065f46; border: 1px solid #34d399; padding: 16px; border-radius: 12px; margin-top: 15px; }
+        .badge-forbidden { background-color: #ffe4e6; color: #9f1239; border: 1px solid #fb7185; padding: 16px; border-radius: 12px; margin-top: 15px; }
+        .admin-card { border: 2px solid #f59e0b; }
+        .footer-note { font-size: 0.85rem; color: #94a3b8; text-align: center; margin-top: 30px; }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen">
-    <header class="bg-emerald-800 text-white shadow-lg p-4 sticky top-0 z-50">
-        <div class="max-w-4xl mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-black">🌱 المستشار الزراعي (النسخة الميدانية)</h1>
-            <span class="text-xs bg-emerald-950 px-3 py-1 rounded-full border border-emerald-600">أوفلاين بالكامل</span>
+<body>
+
+    <header>
+        <div style="max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <h1>🌱 المستشار الزراعي</h1>
+            <span style="font-size: 0.75rem; background: #022c22; padding: 4px 12px; border-radius: 20px; border: 1px solid #059669;">نسخة أوفلاين (V2.0)</span>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto p-4 space-y-6 mt-4">
-        <!-- البحث الميداني -->
-        <div class="glass-card text-slate-900 p-6 rounded-2xl shadow-xl">
-            <h2 class="text-lg font-bold mb-3 text-emerald-900">🔍 التدقيق الفوري للمبيدات والقرارات</h2>
-            <input type="text" id="searchInput" placeholder="اكتب اسم المادة الفعالة أو المبيد (مثال: أبامكتين)..." class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-emerald-600 outline-none">
-            <div id="searchResult" class="mt-4"></div>
+    <main class="container">
+        <!-- قسم البحث الفوري -->
+        <div class="card">
+            <h2>🔍 التدقيق الفوري للمبيدات والقرارات</h2>
+            <p style="font-size: 0.9rem; color: #475569; margin-bottom: 10px;">ابحث عن اسم المادة الفعالة أو المبيد للتحقق من حالتها السيادية:</p>
+            <input type="text" id="searchInput" placeholder="اكتب اسم المادة (مثال: أبامكتين، كلوربيريفوس)...">
+            <div id="searchResult"></div>
         </div>
 
-        <!-- لوحة التحكم وتحديث البيانات (Admin JSON Sync) -->
-        <div class="glass-card text-slate-900 p-6 rounded-2xl shadow-xl border border-amber-500">
-            <h2 class="text-lg font-bold mb-2 text-amber-900">⚙️ لوحة المشرف (تحديث قاعدة البيانات محلياً)</h2>
-            <p class="text-xs text-slate-600 mb-3">قم برفع ملف JSON لتحديث قاعدة المبيدات والقرارات (القرار 248 لسنة 2024 والقرار 500 لسنة 2026) دون الحاجة لتعديل الكود.</p>
-            <input type="file" id="jsonUpload" accept=".json" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100">
-            <button onclick="importJSON()" class="mt-3 bg-amber-600 text-white px-4 py-2 rounded-xl text-sm font-bold hover:bg-amber-700">تحديث القاعدة محلياً</button>
+        <!-- قسم الإدارة وتحديث البيانات محلياً (Offline Sync) -->
+        <div class="card admin-card">
+            <h2>⚙️ لوحة المشرف (تحديث قاعدة البيانات محلياً)</h2>
+            <p style="font-size: 0.85rem; color: #475569; margin-bottom: 10px;">قم برفع ملف JSON لتحديث السجلات والقرارات (القرار 248 لسنة 2024 والقرار 500 لسنة 2026) دون الحاجة لتعديل الكود البرمجي.</p>
+            <input type="file" id="jsonUpload" accept=".json">
+            <button onclick="importJSON()">تحديث قاعدة البيانات الآن</button>
         </div>
     </main>
 
+    <div class="footer-note">
+        <p>المستشار الزراعي | الجهة الإشرافية والتطوير الهندسي</p>
+    </div>
+
     <script>
-        // قاعدة البيانات الافتراضية الأولية (القرارات السيادية والمبيدات)
+        // قاعدة البيانات الأولية
         const defaultDB = [
-            { name: "أبامكتين", status: "مصرح", decree: "القرار 248 لسنة 2024", notes: "يُستخدم ضمن الضوابط المحددة." },
+            { name: "أبامكتين", status: "مصرح", decree: "القرار 248 لسنة 2024", notes: "يُستخدم ضمن الضوابط المحددة والاشتراطات الفنية." },
             { name: "كلوربيريفوس", status: "محظور", decree: "القرار 500 لسنة 2026", notes: "محظور نهائياً لأسباب بيئية وصحية." }
         ];
 
@@ -52,7 +68,7 @@
         }
         initDB();
 
-        // عملية البحث
+        // محرك البحث الفوري
         document.getElementById('searchInput').addEventListener('input', function(e) {
             const query = e.target.value.trim().toLowerCase();
             const db = JSON.parse(localStorage.getItem('pesticides_db') || '[]');
@@ -65,20 +81,21 @@
 
             const match = db.find(item => item.name.toLowerCase().includes(query));
             if (match) {
-                const badgeColor = match.status === 'مصرح' ? 'bg-emerald-100 text-emerald-800 border-emerald-300' : 'bg-rose-100 text-rose-800 border-rose-300';
+                const isAllowed = match.status === 'مصرح';
+                const cssClass = isAllowed ? 'badge-allowed' : 'badge-forbidden';
                 resultDiv.innerHTML = `
-                    <div class="p-4 rounded-xl border ${badgeColor}">
-                        <p class="font-bold text-base">المادة: ${match.name}</p>
-                        <p class="text-sm font-semibold mt-1">الحالة القانونية: ${match.status}</p>
-                        <p class="text-xs mt-1">السند: ${match.decree} - ${match.notes}</p>
+                    <div class="${cssClass}">
+                        <p style="font-size: 1.1rem; font-weight: bold;">المادة: ${match.name}</p>
+                        <p style="margin-top: 6px; font-weight: 700;">الحالة القانونية: ${match.status}</p>
+                        <p style="margin-top: 4px; font-size: 0.9rem;">السند: ${match.decree} - ${match.notes}</p>
                     </div>
                 `;
             } else {
-                resultDiv.innerHTML = `<div class="p-3 bg-slate-100 text-slate-700 rounded-xl text-sm">لم يتم العثور على مطابقة دقيقة داخل قاعدة البيانات المحلية. يرجى التحقق من اسم المادة.</div>`;
+                resultDiv.innerHTML = `<div style="margin-top: 15px; padding: 12px; background: #f1f5f9; color: #334155; border-radius: 10px; font-size: 0.9rem;">لم يتم العثور على مطابقة دقيقة داخل قاعدة البيانات المحلية.</div>`;
             }
         });
 
-        // استيراد وتحديث قاعدة البيانات من ملف JSON
+        // استيراد ملف JSON لتحديث قاعدة البيانات
         function importJSON() {
             const fileInput = document.getElementById('jsonUpload');
             if (fileInput.files.length === 0) {
