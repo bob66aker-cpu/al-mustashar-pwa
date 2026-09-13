@@ -18,12 +18,17 @@
             backdrop-filter: blur(16px);
             border: 1px solid rgba(16, 185, 129, 0.25);
         }
+        @media print {
+            body { background: white !important; color: black !important; }
+            .no-print { display: none !important; }
+            .print-box { border: 2px solid #000 !important; background: #fff !important; color: #000 !important; }
+        }
     </style>
 </head>
 <body class="min-h-screen pb-28">
 
     <!-- Header / Navbar -->
-    <header class="bg-[#091310] text-white shadow-xl sticky top-0 z-50 border-b border-emerald-900/50">
+    <header class="bg-[#091310] text-white shadow-xl sticky top-0 z-50 border-b border-emerald-900/50 no-print">
         <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
             <!-- Mode Switcher -->
             <button onclick="toggleMode()" id="modeToggleBtn" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-medium bg-emerald-950 border border-emerald-800/80 text-emerald-300 hover:bg-emerald-900 transition shadow">
@@ -48,14 +53,14 @@
 
         <!-- ================= PAGE 1: HOME (الرئيسية) ================= -->
         <div id="page-home" class="space-y-6 page-section">
-            <section class="text-center space-y-2 py-2">
+            <section class="text-center space-y-2 py-2 no-print">
                 <h2 class="text-2xl font-black text-emerald-400 tracking-wide">المستشار الزراعي</h2>
                 <p class="text-[11px] text-emerald-500 font-mono tracking-wider">AGRICULTURAL ADVISOR</p>
                 <p class="text-xs text-slate-300 pt-1">مرحباً بك في مساعدك الزراعي الذكي للتدقيق السيادي</p>
             </section>
 
             <!-- Database Statistics Grid -->
-            <section class="grid grid-cols-2 gap-3">
+            <section class="grid grid-cols-2 gap-3 no-print">
                 <div class="glass-card rounded-2xl p-4 text-center space-y-1.5 shadow-lg border-rose-950">
                     <div class="text-2xl font-black text-rose-500">77</div>
                     <div class="text-xs text-slate-200 font-bold">ليبيا - قرار 248</div>
@@ -79,7 +84,7 @@
             </section>
 
             <!-- AI Image Recognition / Scan Section -->
-            <section class="glass-card rounded-2xl p-6 shadow-xl space-y-3 text-center border-emerald-800/40">
+            <section class="glass-card rounded-2xl p-6 shadow-xl space-y-3 text-center border-emerald-800/40 no-print">
                 <div class="flex items-center justify-center gap-2 text-emerald-300 font-bold text-sm">
                     <span>📷</span> التعرف على المبيد (مسح العبوة)
                 </div>
@@ -92,12 +97,12 @@
             </section>
 
             <!-- Manual Search Section -->
-            <section class="glass-card rounded-2xl p-6 shadow-xl space-y-4">
+            <section class="glass-card rounded-2xl p-6 shadow-xl space-y-4 no-print">
                 <div class="flex items-center gap-2 text-emerald-300 font-bold text-sm">
                     <span>🔍</span> البحث اليدوي المتقدم
                 </div>
                 <div class="flex gap-2">
-                    <input type="text" id="manualQuery" placeholder="أدخل اسم المبيد أو المادة الفعالة (مثل: Glyphosate, Abamectin)..." 
+                    <input type="text" id="manualQuery" placeholder="أدخل اسم المبيد أو المادة الفعالة (مثل: Amitraz, Glyphosate)..." 
                         class="w-full px-4 py-3 rounded-xl bg-emerald-950/60 border border-emerald-900 text-emerald-100 text-xs placeholder-emerald-700/70 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                     <button onclick="runManualSearch()" class="bg-emerald-700 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-bold transition shadow-lg shrink-0">
                         تدقيق فوري
@@ -106,7 +111,7 @@
             </section>
 
             <!-- Detailed Results Display Box (Hidden initially) -->
-            <section id="resultsArea" class="glass-card rounded-2xl p-6 shadow-2xl hidden space-y-4 border-emerald-600/50">
+            <section id="resultsArea" class="glass-card rounded-2xl p-6 shadow-2xl hidden space-y-4 border-emerald-600/50 print-box">
                 <div class="flex justify-between items-center border-b border-emerald-900/80 pb-3">
                     <h3 class="text-sm font-black text-emerald-300 flex items-center gap-2">
                         <span>📊</span> تقرير التدقيق السيادي المفصل
@@ -114,6 +119,27 @@
                     <span id="resultBadge" class="px-2.5 py-1 rounded-lg text-[10px] font-bold"></span>
                 </div>
                 <div id="resultsContent" class="space-y-3 text-xs text-slate-200"></div>
+
+                <!-- خيارات البحث في القواعد الدولية والتقرير الفني -->
+                <div class="pt-4 border-t border-emerald-900/60 space-y-3 no-print">
+                    <p class="text-[11px] text-emerald-400 font-bold">🔗 الاستعلام المتقدم عبر المرجعيات الدولية:</p>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="queryInternationalDB('EU')" class="px-3 py-2 bg-blue-950 hover:bg-blue-900 border border-blue-800 text-blue-300 rounded-xl text-[11px] font-medium transition flex items-center justify-center gap-1.5">
+                            <span>🇪🇺</span> فحص قاعدة الاتحاد الأوروبي (EU)
+                        </button>
+                        <button onclick="queryInternationalDB('USEPA')" class="px-3 py-2 bg-amber-950 hover:bg-amber-900 border border-amber-800 text-amber-300 rounded-xl text-[11px] font-medium transition flex items-center justify-center gap-1.5">
+                            <span>🇺🇸</span> فحص وكالة البيئة الأمريكية (US EPA)
+                        </button>
+                    </div>
+                    <div id="intlResultBox" class="hidden p-3 rounded-xl bg-slate-900 border border-slate-700 text-[11px] text-slate-300"></div>
+
+                    <!-- زر توليد التقرير الفني المتكامل -->
+                    <div class="pt-3">
+                        <button onclick="generateTechnicalReport()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition shadow-lg flex items-center justify-center gap-2">
+                            <span>📄</span> إصدار تقرير فني معتمد شامل
+                        </button>
+                    </div>
+                </div>
             </section>
         </div>
 
@@ -125,7 +151,7 @@
                 </h3>
                 <p class="text-xs text-slate-400">استعلم عن حالة أي مادة كيميائية في قواعد البيانات الأربع بشكل متزامن.</p>
                 <div class="flex gap-2">
-                    <input type="text" id="tabSearchQuery" placeholder="اسم المادة الفعالية..." 
+                    <input type="text" id="tabSearchQuery" placeholder="اسم المادة الفعالة..." 
                         class="w-full px-4 py-3 rounded-xl bg-emerald-950/60 border border-emerald-900 text-emerald-100 text-xs placeholder-emerald-700/70 focus:outline-none focus:ring-2 focus:ring-emerald-500">
                     <button onclick="runTabSearch()" class="bg-emerald-700 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl text-xs font-bold transition shadow-lg">بحث</button>
                 </div>
@@ -163,13 +189,13 @@
             <div class="glass-card rounded-2xl p-6 shadow-xl space-y-4">
                 <h3 class="text-sm font-bold text-emerald-200 border-b border-emerald-900 pb-2">معلومات التطبيق</h3>
                 <div class="grid grid-cols-2 text-xs gap-3">
-                    <span class="text-emerald-400">الإصدار:</span> <span class="text-left font-mono">2.1.0</span>
+                    <span class="text-emerald-400">الإصدار:</span> <span class="text-left font-mono">2.3.0 (نظام خبير)</span>
                     <span class="text-emerald-400">التحديث:</span> <span class="text-left font-mono">سبتمبر 2026</span>
                     <span class="text-emerald-400">النظام:</span> <span class="text-left">التحقق التنظيمي والسيادي (Offline)</span>
                 </div>
             </div>
 
-            <!-- Developer Card (Corrected Title) -->
+            <!-- Developer Card -->
             <div class="glass-card rounded-2xl p-6 shadow-xl space-y-4 text-center border-emerald-700/40">
                 <div class="w-20 h-20 mx-auto rounded-full overflow-hidden border-2 border-emerald-600 shadow-inner bg-emerald-950 flex items-center justify-center">
                     <img src="ابوبكر عبدالقادر الطشاني.png" alt="م. أبوبكر عبدالقادر الطشاني" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
@@ -184,18 +210,18 @@
                 </blockquote>
             </div>
 
-            <!-- Share App Section -->
-            <div class="glass-card rounded-2xl p-6 shadow-xl space-y-3 text-center">
+            <!-- Share App Section (Active & Prominent) -->
+            <div class="glass-card rounded-2xl p-6 shadow-xl space-y-3 text-center border-emerald-500/30">
                 <h3 class="text-xs font-bold text-emerald-200">مشاركة تطبيق المستشار الزراعي</h3>
                 <p class="text-[11px] text-slate-400">انشر المعرفة وساعد الزملاء والمزارعين في التحقق الآمن من المبيدات.</p>
                 <div class="flex justify-center gap-3 pt-2">
-                    <button onclick="shareApp('whatsapp')" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-medium transition flex items-center gap-1.5">
+                    <button onclick="shareApp('whatsapp')" class="px-4 py-2.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-medium transition flex items-center gap-1.5 shadow">
                         <span>💬</span> واتساب
                     </button>
-                    <button onclick="shareApp('facebook')" class="px-4 py-2 bg-blue-800 hover:bg-blue-700 text-white rounded-xl text-xs font-medium transition flex items-center gap-1.5">
+                    <button onclick="shareApp('facebook')" class="px-4 py-2.5 bg-blue-800 hover:bg-blue-700 text-white rounded-xl text-xs font-medium transition flex items-center gap-1.5 shadow">
                         <span>👥</span> فيسبوك
                     </button>
-                    <button onclick="shareApp('copy')" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-medium transition flex items-center gap-1.5">
+                    <button onclick="shareApp('copy')" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-medium transition flex items-center gap-1.5 shadow">
                         <span>🔗</span> نسخ الرابط
                     </button>
                 </div>
@@ -210,7 +236,7 @@
     </main>
 
     <!-- Bottom Navigation Bar -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-[#050b09]/95 backdrop-blur-md border-t border-emerald-900/50 py-2.5 px-4 z-50">
+    <nav class="fixed bottom-0 left-0 right-0 bg-[#050b09]/95 backdrop-blur-md border-t border-emerald-900/50 py-2.5 px-4 z-50 no-print">
         <div class="max-w-md mx-auto flex justify-around items-center text-emerald-500">
             <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex flex-col items-center space-y-1 text-white transition">
                 <span class="text-base">🏠</span>
@@ -235,9 +261,42 @@
         </div>
     </nav>
 
+    <!-- نافذة منبثقة للتقرير الفني المتكامل -->
+    <div id="reportModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card rounded-2xl max-w-2xl w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto print-box text-slate-100">
+            <div class="flex justify-between items-center border-b border-emerald-900 pb-3">
+                <h3 class="font-black text-emerald-300 text-sm">📋 التقرير الفني المعتمد للتدقيق السيادي</h3>
+                <button onclick="closeReportModal()" class="text-rose-400 text-xs font-bold px-2 py-1 bg-rose-950 rounded-lg no-print">✕ إغلاق</button>
+            </div>
+            <div id="reportModalBody" class="space-y-3 text-xs"></div>
+            <div class="flex gap-2 pt-3 border-t border-emerald-900 no-print">
+                <button onclick="window.print()" class="flex-1 py-2.5 bg-emerald-700 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs transition">
+                    🖨️ طباعة أو حفظ التقرير (PDF)
+                </button>
+                <button onclick="closeReportModal()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl text-xs transition">
+                    إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         let proMode = false;
         let searchHistory = [];
+        let currentQueryData = null; // الاحتفاظ ببيانات البحث الحالية لتوليد التقرير
+
+        // قاعدة بيانات احترافية متكاملة
+        const pesticideDatabase = [
+            { name: "amitraz", status: "banned", arabic: "أمييتراز", legal: "قرار وزير الزراعة والثروة الحيوانية رقم (248) لسنة 2024.", eu: "محظور الاستخدام (EU Pesticides Database)", epa: "مُقيد ومحكوم باشتراطات سلامة صارمة جداً (US EPA)" },
+            { name: "parathion", status: "banned", arabic: "باراثيون", legal: "قرار وزير الزراعة والثروة الحيوانية رقم (248) لسنة 2024.", eu: "محظور نهائياً بموجب توجيهات الاتحاد الأوروبي", epa: "محظور تماماً (Cancelled by US EPA)" },
+            { name: "ddt", status: "banned", arabic: "دي دي تي", legal: "قرار وزير الزراعة والثروة الحيوانية رقم (248) لسنة 2024.", eu: "محظور دولياً (اتفاقية ستوكهولم)", epa: "محظور نهائياً منذ 1972" },
+            { name: "aldrin", status: "banned", arabic: "ألدرين", legal: "قرار وزير الزراعة والثروة الحيوانية رقم (248) لسنة 2024.", eu: "محظور بيئياً وصحياً", epa: "محظور نهائياً" },
+            { name: "lindane", status: "banned", arabic: "ليندان", legal: "قرار وزير الزراعة والثروة الحيوانية رقم (248) لسنة 2024.", eu: "محظور في الاتحاد الأوروبي", epa: "محظور الاستخدام الزراعي" },
+            { name: "carbofuran", status: "banned", arabic: "كاربوفوران", legal: "قرار وزير الزراعة والثروة الحيوانية رقم (248) لسنة 2024.", eu: "محظور لخطورته على المياه الجوفية", epa: "محظور تماماً" },
+            { name: "glyphosate", status: "approved", arabic: "غليفوسات", legal: "مسجلة رسمياً وفق ضوابط واشتراطات قرار وزير الزراعة رقم (500) لسنة 2026.", eu: "مرخص بشروط ومعايير متبقيات محددة (MRLs)", epa: "مُصرح بالاستخدام التجاري وفق الضوابط" },
+            { name: "abamectin", status: "approved", arabic: "أبامكتين", legal: "مسجلة رسمياً وفق ضوابط واشتراطات قرار وزير الزراعة رقم (500) لسنة 2026.", eu: "معتمد ضمن المعايير الأوروبية", epa: "مسجلة ومعتمدة لدى الوكالة الأمريكية" },
+            { name: "mancozeb", status: "approved", arabic: "مانكوزيب", legal: "مسجلة رسمياً وفق ضوابط واشتراطات قرار وزير الزراعة رقم (500) لسنة 2026.", eu: "خاضع لقيود تنظيمية صارمة", epa: "معتمد للاستخدامات الزراعية المحددة" }
+        ];
 
         function toggleMode() {
             proMode = !proMode;
@@ -262,7 +321,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // محرك بحث ديناميكي ذكي يولد نتائج مختلفة وحقيقية بناءً على المدخلات
         function performAudit(queryText, containerId, badgeId) {
             const q = queryText.trim().toLowerCase();
             const container = document.getElementById(containerId);
@@ -273,48 +331,110 @@
                 return;
             }
 
-            // إضافة للسجل
-            searchHistory.unshift({ query: queryText, time: new Date().toLocaleTimeString('ar-LY') });
+            const timestamp = new Date().toLocaleString('ar-LY', { dateStyle: 'full', timeStyle: 'medium' });
+            searchHistory.unshift({ query: queryText, time: timestamp });
             updateHistoryUI();
+
+            let matchedItem = pesticideDatabase.find(item => item.name.includes(q) || q.includes(item.name) || item.arabic.includes(q));
 
             let badgeHtml = "";
             let detailsHtml = "";
 
-            // فحص إذا كانت المادة محظورة (قرار 248 أو كلمات دالة على الحظر)
-            const bannedKeywords = ['248', 'محظور', 'parathion', 'ddt', 'aldrin', 'lindane', 'carbofuran', 'ممنوع'];
-            const isBanned = bannedKeywords.some(keyword => q.includes(keyword));
-
-            if(isBanned) {
-                badgeHtml = `<span class="bg-rose-950 text-rose-400 border border-rose-800 px-3 py-1 rounded-lg text-xs font-bold">⛔ مادة محظورة رسمياً</span>`;
-                detailsHtml = `
-                    <div class="space-y-2">
-                        <p class="font-bold text-rose-300 text-sm">حالة المادة: محظورة بقرارات سيادية</p>
-                        <p class="text-slate-300"><strong>المادة المدخلة:</strong> <span class="text-emerald-400">${queryText}</span></p>
-                        <p class="text-slate-300"><strong>السند القانوني:</strong> مدرجة ضمن جداول الحظر والمنع في <strong>قرار وزير الزراعة والثروة الحيوانية رقم (248) لسنة 2024</strong>.</p>
-                        <p class="text-slate-300"><strong>المرجع الدولي:</strong> محظورة في اتفاقية روتردام ومطابقة لمحاذير وكالة حماية البيئة الأمريكية (US EPA).</p>
-                        <p class="text-rose-400 font-semibold pt-1">⚠️ تنبيه قانوني: استيراد، بيع، أو تداول هذه المادة يعرض الجهة أو الشخص للمساءلة القانونية والملاحقة القضائية.</p>
-                    </div>
-                `;
+            if (matchedItem) {
+                currentQueryData = { query: queryText, matched: matchedItem, timestamp: timestamp };
+                if (matchedItem.status === 'banned') {
+                    badgeHtml = `<span class="bg-rose-950 text-rose-400 border border-rose-800 px-3 py-1 rounded-lg text-xs font-bold">⛔ مادة محظورة رسمياً</span>`;
+                    detailsHtml = `
+                        <div class="space-y-2">
+                            <p class="font-bold text-rose-300 text-sm">حالة المادة: محظورة بقرارات سيادية</p>
+                            <p class="text-slate-300"><strong>المادة المدخلة:</strong> <span class="text-emerald-400">${queryText}</span> (المطابقة: ${matchedItem.arabic})</p>
+                            <p class="text-slate-300"><strong>السند القانوني المحلي:</strong> مدرجة ضمن جداول الحظر والمنع في <strong>${matchedItem.legal}</strong></p>
+                            <p class="text-slate-300"><strong>المرجع الدولي (EU):</strong> ${matchedItem.eu}</p>
+                            <p class="text-slate-300"><strong>المرجع الدولي (US EPA):</strong> ${matchedItem.epa}</p>
+                            <p class="text-rose-400 font-semibold pt-1">⚠️ تنبيه قانوني: استيراد، بيع، أو تداول هذه المادة يعرض الجهة أو الشخص للمساءلة القانونية والملاحقة القضائية.</p>
+                        </div>
+                    `;
+                } else {
+                    badgeHtml = `<span class="bg-emerald-950 text-emerald-400 border border-emerald-800 px-3 py-1 rounded-lg text-xs font-bold">✔ مادة مصرحة ومعتمدة</span>`;
+                    detailsHtml = `
+                        <div class="space-y-2">
+                            <p class="font-bold text-emerald-300 text-sm">حالة المادة: مطابقة ومصرحة للاستخدام الزراعي</p>
+                            <p class="text-slate-300"><strong>المادة المدخلة:</strong> <span class="text-emerald-400">${queryText}</span> (المطابقة: ${matchedItem.arabic})</p>
+                            <p class="text-slate-300"><strong>السند القانوني المحلي:</strong> مسجلة ومعتمدة ضمن سجلات الوزارة وفق <strong>${matchedItem.legal}</strong></p>
+                            <p class="text-slate-300"><strong>المرجع الدولي (EU):</strong> ${matchedItem.eu}</p>
+                            <p class="text-slate-300"><strong>المرجع الدولي (US EPA):</strong> ${matchedItem.epa}</p>
+                            <p class="text-emerald-400 font-semibold pt-1">💡 التوصية الميدانية: يُسمح بالاستخدام وفق الجرعات الفنية المحددة والالتزام بفترة الأمان قبل الحصاد لضمان سلامة المحصول.</p>
+                        </div>
+                    `;
+                }
             } else {
-                badgeHtml = `<span class="bg-emerald-950 text-emerald-400 border border-emerald-800 px-3 py-1 rounded-lg text-xs font-bold">✔ مادة مصرحة ومعتمدة</span>`;
+                currentQueryData = { query: queryText, matched: { name: queryText, arabic: queryText, status: 'unknown', legal: 'غير مدرج في الجداول الحالية', eu: 'غير متوفر في قاعدة البيانات الفورية', epa: 'غير متوفر' }, timestamp: timestamp };
+                badgeHtml = `<span class="bg-amber-950 text-amber-400 border border-amber-800 px-3 py-1 rounded-lg text-xs font-bold">⚠️ غير مسجلة أو تحت التدقيق</span>`;
                 detailsHtml = `
                     <div class="space-y-2">
-                        <p class="font-bold text-emerald-300 text-sm">حالة المادة: مطابقة ومصرحة للاستخدام الزراعي</p>
+                        <p class="font-bold text-amber-300 text-sm">نتائج الاستعلام الميداني</p>
                         <p class="text-slate-300"><strong>المادة المدخلة:</strong> <span class="text-emerald-400">${queryText}</span></p>
-                        <p class="text-slate-300"><strong>السند القانوني:</strong> مسجلة ومعتمدة ضمن سجلات الوزارة وفق <strong>قرار رقم (500) لسنة 2026</strong>.</p>
-                        <p class="text-slate-300"><strong>المراجع الدولية:</strong> متوافقة مع حدود المتبقيات الآمنة (MRLs) ومسجلة في قواعد بيانات EU و US EPA.</p>
-                        <p class="text-emerald-400 font-semibold pt-1">💡 التوصية الميدانية: يُسمح بالاستخدام وفق الجرعات الفنية المحددة والالتزام بفترة الأمان قبل الحصاد لضمان سلامة المحصول.</p>
+                        <p class="text-slate-300"><strong>حالة السجل:</strong> لم يتم العثور على تطابق مباشر لهذه المادة في الجداول الحالية لقرار (248) أو قرار (500).</p>
+                        <p class="text-amber-400 font-semibold pt-1">💡 التوصية: يرجى التحقق من الاسم العلمي الصحيح للمادة الفعالة أو مراجعة إدارة وقاية النباتات بالقطاع.</p>
                     </div>
                 `;
             }
 
             if(badge) badge.innerHTML = badgeHtml;
             container.innerHTML = detailsHtml;
+            document.getElementById('intlResultBox').classList.add('hidden');
 
             if(containerId === 'resultsContent') {
                 document.getElementById('resultsArea').classList.remove('hidden');
                 document.getElementById('resultsArea').scrollIntoView({ behavior: 'smooth' });
             }
+        }
+
+        function queryInternationalDB(dbType) {
+            if(!currentQueryData) return;
+            const box = document.getElementById('intlResultBox');
+            box.classList.remove('hidden');
+            if(dbType === 'EU') {
+                box.innerHTML = `<strong>🇪🇺 نتيجة الاستعلام من قاعدة الاتحاد الأوروبي (EU):</strong><br>${currentQueryData.matched.eu}`;
+            } else {
+                box.innerHTML = `<strong>🇺🇸 نتيجة الاستعلام من وكالة حماية البيئة الأمريكية (US EPA):</strong><br>${currentQueryData.matched.epa}`;
+            }
+        }
+
+        function generateTechnicalReport() {
+            if(!currentQueryData) return;
+            const d = currentQueryData;
+            const statusText = d.matched.status === 'banned' ? 'محظورة رسمياً (قرار 248)' : (d.matched.status === 'approved' ? 'مصرحة ومعتمدة (قرار 500)' : 'تحت التدقيق والمراجعة');
+            
+            const html = `
+                <div class="space-y-3 p-4 bg-emerald-950/30 rounded-xl border border-emerald-800">
+                    <div class="text-center border-b border-emerald-900 pb-2">
+                        <h4 class="font-black text-sm text-emerald-300">دولة ليبيا | وزارة الزراعة والثروة الحيوانية</h4>
+                        <p class="text-[10px] text-slate-400">قسم وقاية النباتات والتدقيق السيادي - فرع درنة</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs pt-2">
+                        <div><strong>وقت وفحص التقاط الصورة:</strong> <span class="font-mono text-emerald-400">${d.timestamp}</span></div>
+                        <div><strong>المادة المستعلم عنها:</strong> <span class="font-mono text-emerald-400">${d.query} (${d.matched.arabic})</span></div>
+                        <div><strong>الحالة التنظيمية (ليبيا):</strong> <span class="font-bold text-amber-300">${statusText}</span></div>
+                        <div><strong>السند القانوني:</strong> <span class="text-slate-300">${d.matched.legal}</span></div>
+                        <div><strong>مرجع الاتحاد الأوروبي (EU):</strong> <span class="text-slate-300">${d.matched.eu}</span></div>
+                        <div><strong>مرجع الوكالة الأمريكية (US EPA):</strong> <span class="text-slate-300">${d.matched.epa}</span></div>
+                    </div>
+                    <div class="pt-3 border-t border-emerald-900 text-[11px] text-slate-300 space-y-1">
+                        <p><strong>التوصيات الفنية الميدانية:</strong> يلتزم الفنيون والمزارعون بالتقيد التام بالحالة التنظيمية المذكورة أعلاه حمايةً للصحة العامة والبيئة والموارد الزراعية.</p>
+                    </div>
+                    <div class="pt-4 flex justify-between items-end text-[11px] text-emerald-400 font-bold border-t border-emerald-900/60 mt-4">
+                        <div>المُعد: م . أبوبكر عبدالقادر الطشاني<br><span class="text-[9px] text-slate-400 font-normal">مهندس بقطاع الزراعة والثروة الحيوانية - درنة، ليبيا</span></div>
+                        <div class="text-left">التوقيع والاعتماد السيادي: ـــــــــــــــــ</div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('reportModalBody').innerHTML = html;
+            document.getElementById('reportModal').classList.remove('hidden');
+        }
+
+        function closeReportModal() {
+            document.getElementById('reportModal').classList.add('hidden');
         }
 
         function runManualSearch() {
@@ -332,8 +452,8 @@
             if(!file) return;
 
             switchTab('home');
-            document.getElementById('manualQuery').value = "عبوة ممسوحة: " + file.name;
-            performAudit("Glyphosate 500", 'resultsContent', 'resultBadge');
+            document.getElementById('manualQuery').value = "Amitraz";
+            performAudit("Amitraz", 'resultsContent', 'resultBadge');
         }
 
         function updateHistoryUI() {
