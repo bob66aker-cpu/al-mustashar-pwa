@@ -1,0 +1,618 @@
+[
+  {
+    "no": 1,
+    "active_substance": "2,4,5-T; [2,4,5-T-trolamine]; [2,4,5-T-triethylammonium]; [2,4,5-T-isooctyl]",
+    "cas_number": "93-76-5; [3813-14-7]; [2008-46-0]; [25168-15-4]",
+    "main_uses_code": "H/PGR",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 2,
+    "active_substance": "2,4,5-TCP (2,4,5-Trichlorophenol)",
+    "cas_number": "95-95-4",
+    "main_uses_code": "I/F/H",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 3,
+    "active_substance": "2,4-D ((2,4-dichlorophenoxy) acetic acid)",
+    "cas_number": "94-75-7",
+    "main_uses_code": "H",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 4,
+    "active_substance": "Acephate",
+    "cas_number": "30560-19-1",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 5,
+    "active_substance": "Acetochlor",
+    "cas_number": "34256-82-1",
+    "main_uses_code": "H",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 6,
+    "active_substance": "Alachlor",
+    "cas_number": "15972-60-8",
+    "main_uses_code": "H",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 7,
+    "active_substance": "Aldicarb",
+    "cas_number": "116-06-3",
+    "main_uses_code": "N/I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 8,
+    "active_substance": "Aldoxycarb",
+    "cas_number": "1646-88-4",
+    "main_uses_code": "N/I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 9,
+    "active_substance": "Aldrin",
+    "cas_number": "309-00-2",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 10,
+    "active_substance": "Alpha hexachloro cyclohexane",
+    "cas_number": "[58-89-9]",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 11,
+    "active_substance": "Amitraz",
+    "cas_number": "33089-61-1",
+    "main_uses_code": "A/I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 12,
+    "active_substance": "Aramite",
+    "cas_number": "140-57-8",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 13,
+    "active_substance": "Atrazine",
+    "cas_number": "1912-24-9",
+    "main_uses_code": "H",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 14,
+    "active_substance": "Bendiocarb",
+    "cas_number": "22781-23-3",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 15,
+    "active_substance": "Benomyl",
+    "cas_number": "17804-35-2",
+    "main_uses_code": "F/Mi",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 16,
+    "active_substance": "Beta hexachloro cyclohexane",
+    "cas_number": "319-85-7",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 17,
+    "active_substance": "Binapacryl",
+    "cas_number": "485-31-4",
+    "main_uses_code": "I/A/F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 18,
+    "active_substance": "Bromoxynil octanoate",
+    "cas_number": "34681-10-2",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 19,
+    "active_substance": "Butocarboxim",
+    "cas_number": "34681-10-2",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 20,
+    "active_substance": "Butoxycarboxim",
+    "cas_number": "34681-23-7",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 21,
+    "active_substance": "Camphechlor (Toxaphene)",
+    "cas_number": "8001-35-2",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 22,
+    "active_substance": "Captafol",
+    "cas_number": "2425-06-1",
+    "main_uses_code": "F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 23,
+    "active_substance": "Carbaryl",
+    "cas_number": "63-25-2",
+    "main_uses_code": "I/PGR",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 24,
+    "active_substance": "Carbendazim",
+    "cas_number": "10605-21-7",
+    "main_uses_code": "F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 25,
+    "active_substance": "Carbofuran",
+    "cas_number": "1563-66-2",
+    "main_uses_code": "I/A/N",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 26,
+    "active_substance": "Carbon disulphide (Carbon disulfide)",
+    "cas_number": "75-15-0",
+    "main_uses_code": "I/N/FM",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 27,
+    "active_substance": "Carbosulfan",
+    "cas_number": "55285-14-8",
+    "main_uses_code": "I/N",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 28,
+    "active_substance": "Chloranil",
+    "cas_number": "118-75-2",
+    "main_uses_code": "F/RP",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 29,
+    "active_substance": "Chlordane",
+    "cas_number": "57-74-9",
+    "main_uses_code": "I/T",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 30,
+    "active_substance": "Chloropicrin",
+    "cas_number": "76-06-2",
+    "main_uses_code": "I/N/R/FM",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 31,
+    "active_substance": "Chlorpyrifos",
+    "cas_number": "2921-88-2",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 32,
+    "active_substance": "Cyanide Compounds; Hydrogen cyanide; [Calcium cyanide]; [Sodium cyanide]",
+    "cas_number": "74-90-8; [592-01-8]; [143-33-9]",
+    "main_uses_code": "I/R/FM; [I/R/FM]; [I/R]",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 33,
+    "active_substance": "DDT",
+    "cas_number": "50-29-3",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 34,
+    "active_substance": "Diazinon",
+    "cas_number": "333-41-5",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 35,
+    "active_substance": "Dicofol",
+    "cas_number": "115-32-2",
+    "main_uses_code": "A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 36,
+    "active_substance": "Dicrotophos",
+    "cas_number": "141-66-2",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 37,
+    "active_substance": "Dieldrin",
+    "cas_number": "60-57-1",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 38,
+    "active_substance": "Dimefox",
+    "cas_number": "115-26-4",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 39,
+    "active_substance": "Dimethoate",
+    "cas_number": "60-51-5",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 40,
+    "active_substance": "Dinoseb and Dinoseb salts",
+    "cas_number": "88-85-7",
+    "main_uses_code": "H/I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 41,
+    "active_substance": "Endosulfan",
+    "cas_number": "115-29-7",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 42,
+    "active_substance": "Endrin",
+    "cas_number": "72-20-8",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 43,
+    "active_substance": "Ethion",
+    "cas_number": "563-12-2",
+    "main_uses_code": "A/I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 44,
+    "active_substance": "Fipronil",
+    "cas_number": "120068-37-3",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 45,
+    "active_substance": "Fluoroacetamide",
+    "cas_number": "640-19-7",
+    "main_uses_code": "R",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 46,
+    "active_substance": "Flusilazole",
+    "cas_number": "85509-19-9",
+    "main_uses_code": "F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 47,
+    "active_substance": "Gamma hexachloro cyclohexane (lindane)",
+    "cas_number": "608-73-1",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 48,
+    "active_substance": "Heptachlor",
+    "cas_number": "76-44-8",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 49,
+    "active_substance": "Hexachlorobenzene",
+    "cas_number": "118-74-1",
+    "main_uses_code": "F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 50,
+    "active_substance": "Hexaconazole",
+    "cas_number": "79983-71-4",
+    "main_uses_code": "F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 51,
+    "active_substance": "Iprodione",
+    "cas_number": "36734-19-7",
+    "main_uses_code": "F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 52,
+    "active_substance": "Lead compounds; [Lead arsenate]; [Lead arsenite]",
+    "cas_number": "[7784-40-9]; [10031-13-7]",
+    "main_uses_code": "I/A/N/PGR",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 53,
+    "active_substance": "Linuron",
+    "cas_number": "330-55-2",
+    "main_uses_code": "H",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 54,
+    "active_substance": "Mancozeb",
+    "cas_number": "8018-01-7",
+    "main_uses_code": "F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 55,
+    "active_substance": "Maneb",
+    "cas_number": "12427-38-2",
+    "main_uses_code": "F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 56,
+    "active_substance": "Methamidophos",
+    "cas_number": "10265-92-6",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 57,
+    "active_substance": "Methomyl",
+    "cas_number": "16752-77-5",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 58,
+    "active_substance": "Methoxychlor",
+    "cas_number": "72-43-5",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 59,
+    "active_substance": "Methyl bromide",
+    "cas_number": "74-83-9",
+    "main_uses_code": "I/N/F/A/R/FM",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 60,
+    "active_substance": "Methyl isothiocyanate",
+    "cas_number": "556-61-6",
+    "main_uses_code": "N/F/I/H",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 61,
+    "active_substance": "Mirex",
+    "cas_number": "2385-85-5",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 62,
+    "active_substance": "Oxadiazon",
+    "cas_number": "19666-30-9",
+    "main_uses_code": "H",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 63,
+    "active_substance": "Paraquat dichloride; [Paraquat]",
+    "cas_number": "1910-42-5; [4685-14-7]",
+    "main_uses_code": "H",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 64,
+    "active_substance": "Parathion (Parathion-ethyl)",
+    "cas_number": "56-38-2",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 65,
+    "active_substance": "Parathion-methyl (emulsifiable concentrates (EC) at or above 19.5% active ingredient and dusts at or above 1.5% active ingredient)",
+    "cas_number": "298-00-0",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 66,
+    "active_substance": "Pentachlorophenol",
+    "cas_number": "87-86-5",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 67,
+    "active_substance": "Phosphamidon",
+    "cas_number": "13171-21-6",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 68,
+    "active_substance": "Phosphamidon (mixture, (E) & (Z) isomers), (soluble liquid formulations of the substance that exceed 1,000 g active ingredient/l); [E-Phosphamidon]; [Z-Phosphamidon]",
+    "cas_number": "13171-21-6; [297-99-4]; [23783-98-4]",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 69,
+    "active_substance": "Procymidon",
+    "cas_number": "32809-16-8",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 70,
+    "active_substance": "Procymidon (Procymidone)",
+    "cas_number": "32809-16-8",
+    "main_uses_code": "F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 71,
+    "active_substance": "Propineb",
+    "cas_number": "12071-83-9",
+    "main_uses_code": "F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 72,
+    "active_substance": "Propoxur",
+    "cas_number": "114-26-1",
+    "main_uses_code": "I",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 73,
+    "active_substance": "Tetradifon",
+    "cas_number": "116-29-0",
+    "main_uses_code": "I/A",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 74,
+    "active_substance": "Thiram (Tetramethylthiuramdisulfide) (in formulations with benomyl and carbofuran) (Granular only)",
+    "cas_number": "137-26-8",
+    "main_uses_code": "F/I/N",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 75,
+    "active_substance": "Triazophos",
+    "cas_number": "24017-47-8",
+    "main_uses_code": "I/A/N",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 76,
+    "active_substance": "Zineb",
+    "cas_number": "12122-67-7",
+    "main_uses_code": "F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  },
+  {
+    "no": 77,
+    "active_substance": "Ziram",
+    "cas_number": "137-30-4",
+    "main_uses_code": "F",
+    "status_simplified": "محظور",
+    "decision_reference": "قرار وزير الزراعة رقم 248 لسنة 2024م بشأن حظر استخدام بعض المواد الفعالة"
+  }
+]
