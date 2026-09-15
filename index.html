@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07140f">
+<meta name="description" content="المستشار الزراعي - تطبيق توعوي وتقني للمواد الفعالة في المبيدات الزراعية والتحقق من حالات الاعتماد والحظر">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="المستشار الزراعي">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>المستشار الزراعي</title>
+<style>
+:root{
+  --bg:#06100c;--surface:#0f261b;--surface2:#020b07;--headerbg:#06100cf5;--tabbg:#040b08fa;
+  --l:#72e6a52b;--t:#eef9f2;--m:#9db5a8;
+  --g:#35d47a;--r:#ff6575;--a:#ffc857;--b:#65b7ff;
+  --radius-lg:22px;--radius-md:16px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --safe-top:env(safe-area-inset-top,0px);--safe-bottom:env(safe-area-inset-bottom,0px);
+}
+:root[data-theme="light"]{
+  --bg:#eef5f0;--surface:#ffffff;--surface2:#f2f7f4;--headerbg:#ffffffef;--tabbg:#ffffffef;
+  --l:#0a7d4633;--t:#0c2015;--m:#4f6a5a;
+  --g:#1f8f4c;--r:#c8283c;--a:#a8710a;--b:#1c6fc9;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--t);
+  font-family:'Cairo',system-ui,Tahoma,Arial,sans-serif;-webkit-tap-highlight-color:transparent;transition:background .25s,color .25s}
+.app{max-width:1050px;margin:auto;padding:0 16px calc(110px + var(--safe-bottom))}
+header{position:sticky;top:0;z-index:5;background:var(--headerbg);border-bottom:1px solid var(--l);padding-top:var(--safe-top)}
+.top{max-width:1050px;margin:auto;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;gap:10px;align-items:center;user-select:none}
+.logo{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;background:#12452b;
+  border:1px solid var(--l);font-size:23px;cursor:pointer}
+.brand h1{font-size:17px;margin:0;font-weight:800;color:var(--t)}
+.brand small,.meta,small{color:var(--m)}
+.netpill{font-size:9px;color:var(--m)}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.pill,.btn{border-radius:14px;padding:10px 14px;border:1px solid var(--l);background:#163c29;color:#b5f3cb;font-weight:800;font-size:11px}
+.primary{background:#1c9a56;color:#fff;border-color:transparent}
+.danger{background:#511823;color:#ffadb6}
+.headrow{display:flex;gap:8px;align-items:center}
+.linkbtn{background:none;border:0;color:#9af4ba;text-decoration:underline;font-size:12px;padding:6px}
+
+.screen{display:none}
+.screen.active{display:block}
+
+.hero{padding:24px 0 15px}
+.hero h2{font-size:27px;margin:0 0 6px;font-weight:800}
+.hero p{margin:0;color:var(--m);font-size:13px;line-height:1.8}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:11px}
+.card{background:var(--surface);border:1px solid var(--l);border-radius:var(--radius-lg);padding:17px}
+.stat b{font-size:22px;display:block}
+.stat span{font-size:11px}
+.stat em{font-size:9px;color:#8df0b0;font-style:normal}
+.skeleton{position:relative;overflow:hidden;color:transparent!important;border-radius:8px;background:#173628}
+.skeleton::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,#2c5c40aa,transparent);animation:shimmer 1.4s infinite}
+@keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.section{margin-top:14px}
+.title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:11px}
+.title h3{margin:0;font-size:15px;font-weight:800}
+.search{display:flex;gap:8px}
+.search-wrap{position:relative;flex:1;min-width:0}
+.search-wrap input{width:100%;padding:14px 40px 14px 14px;border-radius:var(--radius-md);border:1px solid var(--l);
+  background:var(--surface2);color:var(--t);outline:0}
+.search-wrap input:focus{border-color:var(--g)}
+@keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}
+  30%,50%,70%{transform:translateX(-4px)}40%,60%{transform:translateX(4px)}}
+.shake{animation:shake .4s}
+.toast{position:fixed;bottom:calc(100px + var(--safe-bottom));left:50%;transform:translateX(-50%);
+  background:var(--surface);border:1px solid var(--l);color:var(--t);padding:10px 18px;border-radius:20px;
+  font-size:12px;z-index:40;box-shadow:0 8px 24px #0006}
+.clearBtn{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;
+  border:0;background:#1e4a32;color:#bdf0cf;font-size:14px;display:none;align-items:center;justify-content:center;padding:0;z-index:2}
+.clearBtn.show{display:flex}
+.actions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.action{text-align:center;min-height:100px}
+.action span{font-size:26px;display:block;margin-bottom:6px}
+.status{font-size:11px;color:var(--m);margin-top:9px;display:flex;align-items:center}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#65736b;margin-left:6px}
+.hidden{display:none!important}
+.badge{padding:7px 10px;border-radius:10px;font-size:10px;font-weight:900}
+
+.bigresult{border-radius:var(--radius-lg);padding:20px;margin-top:10px;border:2px solid}
+.bigresult h2{margin:0 0 4px;font-size:23px}
+.bigresult .bigscore{font-size:12px;opacity:.85;margin-bottom:10px}
+.bigresult .biglabel{display:inline-block;padding:8px 16px;border-radius:12px;font-weight:900;font-size:15px;margin-bottom:12px}
+.bigresult .meta{font-size:13px;line-height:2}
+.cas-list{font-size:12px;line-height:2;margin-top:8px;padding-top:8px;border-top:1px solid #ffffff22}
+
+.match{margin-top:9px;padding:13px;border:1px solid var(--l);border-right-width:5px;border-radius:var(--radius-md);background:var(--surface2)}
+.mtop{display:flex;justify-content:space-between;gap:10px}
+.score{color:#9af4ba;font-weight:900}
+.meta{font-size:10px;line-height:1.9;margin-top:5px}
+.simple .pro-only{display:none}
+.more-toggle{margin-top:12px;width:100%;text-align:center;padding:11px;border-radius:var(--radius-md);
+  border:1px dashed var(--l);background:transparent;color:var(--m);font-size:12px}
+.notice,.success,.error{padding:12px;border-radius:14px;font-size:11px;line-height:1.8;margin-top:10px}
+.notice{background:#5a430b22;border:1px solid #ffc85733;color:#ffe1a0}
+.success{background:#16854a18;border:1px solid #35d47a33;color:#a8f3c2}
+.error{background:#8e172318;border:1px solid #ff657533;color:#ffb0b8}
+.update-banner{max-width:1050px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;
+  gap:10px;background:#123c5d;border-bottom:1px solid #65b7ff33;font-size:12px}
+.tabs{position:fixed;z-index:10;bottom:0;left:0;right:0;background:var(--tabbg);
+  border-top:1px solid var(--l);padding:8px 8px calc(8px + var(--safe-bottom))}
+.tabsin{max-width:600px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.tab{border:0;background:none;color:#769083;font-size:10px;padding:6px 0;border-radius:12px}
+.tab span{display:block;font-size:19px}
+.tab.active{color:#9af4ba;background:#12452b55}
+.preview{max-width:100%;max-height:260px;border-radius:var(--radius-md);border:1px solid var(--l);margin-top:8px}
+footer{text-align:center;color:var(--m);font-size:10px;padding:25px}
+.modal{position:fixed;inset:0;z-index:30;background:#000c;display:grid;place-items:center;padding:15px}
+.modal>div{width:min(720px,100%);max-height:90vh;overflow:auto;background:var(--surface);border:1px solid var(--l);
+  border-radius:var(--radius-lg);padding:18px}
+.progress-wrap{height:8px;border-radius:5px;background:#0a1f15;overflow:hidden;margin-top:8px}
+.progress-bar{height:100%;background:#35d47a;width:0%;transition:width .2s linear}
+.ocr-readout{width:100%;font-size:11px;color:var(--m);background:var(--surface2);border:1px solid var(--l);border-radius:var(--radius-md);
+  padding:10px;margin-top:8px}
+.ocr-text{width:100%;min-height:60px;background:var(--surface2);border:1px solid var(--l);border-radius:var(--radius-md);
+  color:var(--t);padding:10px;margin-top:8px;resize:vertical}
+.about-photo{width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid var(--g);display:block;margin:0 auto 14px}
+.about-card{text-align:center}
+.shareRow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+
+.simplecard{text-align:center;border-radius:var(--radius-lg);padding:32px 20px;margin-top:10px;border:3px solid}
+.simplecard .icon{font-size:64px;display:block;margin-bottom:6px}
+.simplecard .word{font-size:30px;font-weight:900;margin-bottom:14px}
+.simplecard .phrase{font-size:17px;font-weight:800;margin-bottom:18px;line-height:1.7}
+.simplecard .advice{background:#00000030;border-radius:14px;padding:14px;font-size:14px;line-height:1.8;text-align:right}
+.simplecard .advice b{display:block;margin-bottom:6px}
+.cat-pill{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:20px;background:#ffffff18;font-size:12px}
+
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr)}.actions{grid-template-columns:1fr 1fr}
+  .search{flex-direction:column}.shareRow{grid-template-columns:1fr 1fr}}
+@media print{.no-print{display:none!important}body{background:#fff;color:#111}
+  .card,.match{box-shadow:none;background:#fff;border:1px solid #aaa}}
+</style>
+</head>
+<body>
+
+<header class="no-print">
+  <div class="top">
+    <div class="brand" id="logoTap">
+      <div class="logo">🌿</div>
+      <div><h1>المستشار الزراعي</h1><small>فحص المبيدات — Offline First</small><br><span class="netpill" id="netStatus">🟢 متصل</span></div>
+    </div>
+    <div class="headrow">
+      <button class="pill" id="themeBtn" onclick="toggleTheme()">☀️</button>
+      <button class="pill hidden" id="installBtn" onclick="installApp()">📲 تثبيت</button>
+      <button class="pill" id="modeBtn" onclick="toggleMode()">المزارع البسيط</button>
+    </div>
+  </div>
+</header>
+
+<div id="updateBanner" class="update-banner hidden no-print">
+  <span>🔄 تتوفر نسخة أحدث من قواعد البيانات</span>
+  <button class="btn primary" onclick="location.reload()">تحديث الآن</button>
+</div>
+<div id="iosBanner" class="update-banner hidden no-print">
+  <span>📲 لحفظ البيانات دائمًا: اضغط زر المشاركة ⬆️ ثم "إضافة إلى الشاشة الرئيسية"</span>
+  <button class="btn" onclick="dismissIosBanner()">فهمت ✕</button>
+</div>
+
+<main class="app">
+
+  <section class="screen active" id="screen-home">
+    <div class="hero">
+      <h2>المستشار الزراعي</h2>
+      <p>مرحبًا بك في مساعدك الزراعي الذكي — تحقّق من تطابق المبيد مع قرارات الدولة الليبية بثقة، عبر أربع قواعد بيانات محلية بدون اختلاق نتائج.</p>
+    </div>
+    <div class="grid">
+      <div class="card stat"><b id="n248" class="skeleton">00</b><span>🇱🇾 قرار 248 (محظور)</span><em id="d248">— سجل</em></div>
+      <div class="card stat"><b id="n500" class="skeleton">00</b><span>🇱🇾 قرار 500</span><em id="d500">— سجل</em></div>
+      <div class="card stat"><b id="neu" class="skeleton">00</b><span>🇪🇺 الاتحاد الأوروبي</span><em id="deu">— سجل</em></div>
+      <div class="card stat"><b id="nusa" class="skeleton">00</b><span>🇺🇸 USA / EPA</span><em id="dusa">— سجل</em></div>
+    </div>
+    <div class="card section">
+      <div class="status"><i class="dot" id="dot"></i><span id="status">جاري تحميل البيانات المحلية…</span></div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-search">
+    <div class="card section" style="margin-top:14px">
+      <div class="title"><h3>🔎 البحث الدقيق</h3><small>عرض ≥ 80%</small></div>
+      <div class="search">
+        <div class="search-wrap">
+          <input id="q" placeholder="اسم المادة الفعالة أو الاسم التجاري أو CAS">
+          <button type="button" class="clearBtn" id="clearBtn" onclick="clearSearchBox()">✕</button>
+        </div>
+        <button class="btn primary" onclick="doSearch()">فحص الآن</button>
+      </div>
+    </div>
+    <section id="res" class="hidden"><div id="body"></div></section>
+  </section>
+
+  <section class="screen" id="screen-scan">
+    <div class="actions section no-print" style="margin-top:14px">
+      <button class="card action" onclick="cam.click()"><span>📷</span><b>تصوير العبوة</b><small>الكاميرا</small></button>
+      <button class="card action" onclick="gal.click()"><span>🖼️</span><b>اختيار صورة</b><small>من الهاتف</small></button>
+    </div>
+    <input id="cam" class="hidden" type="file" accept="image/*" capture="environment">
+    <input id="gal" class="hidden" type="file" accept="image/*">
+
+    <section id="photo" class="card section hidden">
+      <div class="title"><h3>🖼️ الصورة</h3><button class="btn danger" onclick="clearPhoto()">مسح</button></div>
+      <img id="img" class="preview">
+      <div class="progress-wrap hidden" id="ocrProgressWrap"><div class="progress-bar" id="ocrProgressBar"></div></div>
+      <div class="meta" id="ocrStatus" style="margin-top:8px"></div>
+      <div class="notice">صوّر اسم المادة الفعالة فقط عن قرب وبإضاءة جيدة لأفضل نتيجة — البحث يبدأ تلقائيًا فور التصوير. يتطلب إنترنت لتحميل محرك القراءة. البحث بالاسم يدويًا يعمل دائمًا أوفلاين 100%.</div>
+    </section>
+    <section id="scanRes" class="hidden section"><div id="scanBody"></div></section>
+    <div id="ocrManualWrap" class="card section hidden">
+      <button class="linkbtn" onclick="$('ocrManual').classList.toggle('hidden')">✏️ لم تظهر النتيجة الصحيحة؟ عدّل النص يدويًا</button>
+      <div id="ocrManual" class="hidden">
+        <textarea id="ocrText" class="ocr-text" placeholder="عدّل النص هنا ثم اضغط ابحث"></textarea>
+        <button class="btn primary" style="margin-top:8px" onclick="searchFromManualText()">🔎 ابحث بهذا النص</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-history">
+    <div class="card section" style="margin-top:14px">
+      <div class="title"><h3>🕘 سجل عمليات البحث</h3><button class="btn danger" onclick="clearHist()">مسح الكل</button></div>
+      <div id="hist" class="meta">لا توجد عمليات بحث بعد.</div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-about">
+    <div class="card section about-card" style="margin-top:14px">
+      <img class="about-photo" src="about-photo.jpg" alt="صورة المطوّر" onerror="this.style.display='none'">
+      <h3 style="margin:0 0 4px">م . أبوبكر عبدالقادر الطشاني</h3>
+      <small>مهندس بقطاع الزراعة والثروة الحيوانية – درنة</small>
+      <p style="color:#9af4ba;font-weight:800;margin-top:16px">«على قدر المعرفة تأتي المسؤولية»</p>
+      <div class="notice" style="text-align:right">عدم العثور على مادة في قاعدة بيانات لا يعني أنها مسموحة. المرجع القانوني النهائي هو الجهة الرسمية المختصة.</div>
+    </div>
+  </section>
+
+</main>
+
+<footer>المستشار الزراعي • Offline First</footer>
+
+<nav class="tabs no-print">
+  <div class="tabsin">
+    <button class="tab active" onclick="showScreen('home',this)"><span>🏠</span>الرئيسية</button>
+    <button class="tab" onclick="showScreen('search',this,true)"><span>🔍</span>البحث</button>
+    <button class="tab" onclick="showScreen('scan',this)"><span>📷</span>المسح</button>
+    <button class="tab" onclick="showScreen('history',this)"><span>🕘</span>السجل</button>
+    <button class="tab" onclick="showScreen('about',this)"><span>ℹ️</span>حول</button>
+  </div>
+</nav>
+
+<div id="modal" class="modal hidden no-print">
+  <div>
+    <div class="title"><h3>🛠️ لوحة المطوّر</h3><button class="btn danger" onclick="closeImport()">إغلاق</button></div>
+    <p class="meta">للمطوّر فقط. ضع الملفات النهائية دائمًا في مجلد <b>data/</b> على GitHub.</p>
+    <input id="files" type="file" accept=".json,application/json" multiple>
+    <div id="log"></div>
+  </div>
+</div>
+
+<script>
+const CFG={
+  l248:['data/libya-248.json','n248','d248','ليبيا 248'],
+  l500:['data/libya-500.json','n500','d500','قرار 500'],
+  eu:['data/eu-pesticides.json','neu','deu','الاتحاد الأوروبي'],
+  usa:['data/usa-epa.json','nusa','dusa','USA / EPA']
+};
+const DB={l248:[],l500:[],eu:[],usa:[]};
+const MIN=80;
+const CATMAP={I:'حشري',F:'فطري',H:'أعشاب',A:'عناكب/أكاروسي',N:'نيماتودي',R:'قوارض',M:'نواعم/قواقع',
+  'S.PH':'فرمون جنسي',PGR:'منظم نمو نبات',REP:'طارد',V:'فيروسي/كائنات دقيقة'};
+const SHADES={
+  l248:{red:'#ff4d4d',green:'#2ecc71',amber:'#f1c40f',blue:'#3498db'},
+  l500:{red:'#ff6b6b',green:'#35d47a',amber:'#ffc857',blue:'#65b7ff'},
+  eu:{red:'#ff8a80',green:'#69f0ae',amber:'#ffe57f',blue:'#82b1ff'},
+  usa:{red:'#ff80ab',green:'#b9f6ca',amber:'#ffd180',blue:'#80d8ff'}
+};
+/* تدرّجات أغمق وأكثر تباينًا لوضع النهاري (خلفية فاتحة) */
+const SHADES_LIGHT={
+  l248:{red:'#c8283c',green:'#1f8f4c',amber:'#a8710a',blue:'#1c6fc9'},
+  l500:{red:'#d1394a',green:'#1f8f4c',amber:'#a8710a',blue:'#1c6fc9'},
+  eu:{red:'#d85a4f',green:'#1e8f6a',amber:'#a97f1e',blue:'#2c6fae'},
+  usa:{red:'#c94a72',green:'#3a8f5a',amber:'#a97a3a',blue:'#3a7fae'}
+};
+function shadeFor(k,color){
+  let theme=document.documentElement.getAttribute('data-theme');
+  return(theme==='light'?SHADES_LIGHT:SHADES)[k][color]
+}
+let simple=false,cur=null;
+const $=x=>document.getElementById(x);
+
+function norm(x){return String(x??'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
+  .replace(/[إأآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').replace(/ـ/g,'')
+  .replace(/[^\p{L}\p{N}\s./-]/gu,' ').replace(/\s+/g,' ').trim()}
+function compact(x){return norm(x).replace(/[\s./-]/g,'')}
+function field(r,arr){let ks=Object.keys(r||{});for(const n of arr){let k=ks.find(x=>norm(x)===norm(n));
+  if(k&&String(r[k]).trim())return String(r[k]).trim()}return ''}
+function cas(x){return /^\d{2,7}-\d{2}-\d$/.test(String(x||'').trim())}
+function lev(a,b){a=compact(a);b=compact(b);if(a===b)return 0;if(!a)return b.length;if(!b)return a.length;
+  let p=Array.from({length:b.length+1},(_,i)=>i);
+  for(let i=1;i<=a.length;i++){let c=[i];for(let j=1;j<=b.length;j++)
+    c[j]=Math.min(c[j-1]+1,p[j]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=c}
+  return p[b.length]}
+function sim(a,b){a=norm(a);b=norm(b);if(!a||!b)return 0;if(a===b)return 100;
+  if(a.length>=4&&b.includes(a))return Math.max(90,Math.round(a.length/b.length*100));
+  if(b.length>=4&&a.includes(b))return Math.max(90,Math.round(b.length/a.length*100));
+  let m=Math.max(compact(a).length,compact(b).length);
+  return m?Math.max(0,Math.round((1-lev(a,b)/m)*100)):0}
+function fields(r){return[
+  ['cas','cas number','cas_no','cas_number','رقم cas'],
+  ['active ingredient','active substance','active_ingredient','active_substance','المادة الفعالة'],
+  ['common name','common_name','الاسم الشائع'],
+  ['product name','product_name','trade name','commercial name','اسم المبيد','الاسم التجاري'],
+  ['chemical name','chemical_name','الاسم الكيميائي'],
+  ['synonyms','synonym','مرادفات']
+]}
+function score(q,r){let best=0,mf='',ec=false;
+  for(const a of fields(r)){let f=field(r,a);if(!f)continue;
+    if(cas(q)&&cas(f)&&compact(q)===compact(f))return{score:100,field:f,ec:true};
+    let s=sim(q,f);if(s>best){best=s;mf=f}
+    if(norm(q)===norm(f))best=100}
+  return{score:best,field:mf,ec}}
+
+async function load(){
+  await Promise.all(Object.entries(CFG).map(async([k,c])=>{
+    try{
+      let r=await fetch(c[0],{cache:'no-store'});
+      if(!r.ok)throw Error(r.status);
+      let d=await r.json();
+      let rows=Array.isArray(d)?d:(d.rows||d.data||[]);
+      DB[k]=Array.isArray(rows)?rows.map((x,i)=>({...x,__row:i+1,__source:k})):[]
+    }catch(e){DB[k]=[]}
+  }));
+  updateStats();
+  checkForUpdates();
+}
+function updateStats(){
+  let total=0;
+  for(const[k,c]of Object.entries(CFG)){
+    let n=DB[k].length;total+=n;
+    let statEl=$(c[1]);
+    statEl.classList.remove('skeleton');
+    statEl.textContent=n?n.toLocaleString('en-US'):'—';
+    $(c[2]).textContent=(n?n.toLocaleString('en-US'):'0')+' سجل'
+  }
+  if(total>0){$('dot').style.background='var(--g)';$('dot').style.boxShadow='0 0 8px #35d47a'}
+  $('status').textContent=total?'تم تحميل البيانات المحلية؛ البحث لا يحتاج اتصالًا':'لم تُحمّل قواعد البيانات. لن يتم عرض بيانات مصطنعة.';
+  renderHist();
+}
+function rowsFor(q,k){let out=[];for(const r of DB[k]){let s=score(q,r);if(s.score>=MIN)out.push({r,s,k,q})}return out}
+function prioritySort(list){
+  const rank=k=>k==='l248'?0:k==='l500'?1:2;
+  return list.slice().sort((a,b)=>{
+    let ra=rank(a.k),rb=rank(b.k);
+    if(ra!==rb)return ra-rb;
+    if((b.s.ec?1:0)!==(a.s.ec?1:0))return(b.s.ec?1:0)-(a.s.ec?1:0);
+    return b.s.score-a.s.score
+  })
+}
+function dedupe(list){
+  let map=new Map();
+  for(const x of list){let key=x.k+'_'+x.r.__row;let prev=map.get(key);
+    if(!prev||x.s.score>prev.s.score)map.set(key,x)}
+  return[...map.values()]
+}
+function searchAll(q){
+  let all=[];for(const k of Object.keys(DB))all.push(...rowsFor(q,k));
+  return prioritySort(dedupe(all))
+}
+function showToast(msg){
+  let t=document.createElement('div');
+  t.className='toast';t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(),2200)
+}
+
+/* ---------- الوضع الداكن/النهاري ---------- */
+function toggleTheme(){
+  let t=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+  document.documentElement.setAttribute('data-theme',t);
+  $('themeBtn').textContent=t==='light'?'🌙':'☀️';
+  localStorage.agriTheme=t;
+  if(cur&&cur.all){
+    if(!$('res').classList.contains('hidden'))render($('body'),$('res'),cur.q,cur.all);
+    else if(!$('scanRes').classList.contains('hidden'))render($('scanBody'),$('scanRes'),cur.q,cur.all)
+  }
+}
+(function initTheme(){
+  let saved=localStorage.agriTheme||'dark';
+  document.documentElement.setAttribute('data-theme',saved);
+  window.addEventListener('DOMContentLoaded',()=>{$('themeBtn').textContent=saved==='light'?'🌙':'☀️'})
+})();
+
+/* ---------- بانر آيفون: أضف للشاشة الرئيسية ---------- */
+function isIOS(){return /iphone|ipad|ipod/i.test(navigator.userAgent)}
+function isStandalone(){return window.navigator.standalone===true||window.matchMedia('(display-mode: standalone)').matches}
+function dismissIosBanner(){$('iosBanner').classList.add('hidden');localStorage.agriIosDismiss=Date.now()}
+function maybeShowIosBanner(){
+  if(!isIOS()||isStandalone())return;
+  let dismissed=Number(localStorage.agriIosDismiss||0);
+  if(Date.now()-dismissed<7*24*60*60*1000)return;
+  $('iosBanner').classList.remove('hidden')
+}
+
+/* ---------- Wake Lock: منع إطفاء الشاشة أثناء المسح فقط ---------- */
+let wakeLock=null;
+async function acquireWakeLock(){
+  try{if('wakeLock' in navigator)wakeLock=await navigator.wakeLock.request('screen')}catch(e){}
+}
+function releaseWakeLock(){
+  try{wakeLock&&wakeLock.release();wakeLock=null}catch(e){}
+}
+
+function doSearch(){
+  let q=$('q').value.trim();
+  if(!q){
+    $('q').focus();
+    $('q').classList.remove('shake');void $('q').offsetWidth;$('q').classList.add('shake');
+    if(navigator.vibrate)navigator.vibrate(30);
+    return
+  }
+  let all=searchAll(q);
+  cur={q,all};
+  logHist(q,all.length);
+  render($('body'),$('res'),q,all);
+  $('res').scrollIntoView({behavior:'smooth'})
+}
+function clearResult(){
+  $('res').classList.add('hidden');
+  $('body').innerHTML='';
+  cur=null
+}
+function clearSearchBox(){
+  $('q').value='';
+  $('clearBtn').classList.remove('show');
+  clearResult();
+  $('q').focus()
+}
+$('q').oninput=e=>{
+  $('clearBtn').classList.toggle('show',e.target.value.length>0);
+  if(!e.target.value.trim())clearResult()
+};
+
+function logHist(q,n){
+  let h=JSON.parse(localStorage.agriHist||'[]');
+  h.unshift({q,n,t:new Date().toLocaleString('ar-LY')});
+  localStorage.agriHist=JSON.stringify(h.slice(0,50));
+  renderHist()
+}
+function renderHist(){
+  let h=JSON.parse(localStorage.agriHist||'[]');
+  $('hist').innerHTML=h.length?h.map(x=>'<div class="match"><b>'+esc(x.q)+'</b><div class="meta">'+x.t+' • '+x.n+' نتيجة ≥80%</div></div>').join(''):'لا توجد عمليات بحث بعد.'
+}
+function clearHist(){localStorage.removeItem('agriHist');renderHist()}
+
+function statusColor(k,r){
+  let s=norm(field(r,['status_simplified','status','الحالة']));
+  if(k==='l248')return'red';
+  if(s.includes('محظور')||s.includes('not approved')||s.includes('banned'))return'red';
+  if(s.includes('مقيد')||s.includes('restrict'))return'amber';
+  if(s.includes('مسموح')||s.includes('approved'))return'green';
+  return'blue'
+}
+function statusPhrase(k,r){
+  let s=field(r,['status_simplified','status','الحالة']);
+  if(k==='l248')return'محظور وفق قرار رقم 248';
+  if(k==='l500')return(s||'غير محدد')+' وفق قرار رقم 500';
+  if(k==='eu')return'حالتها في أوروبا: '+(s||'غير محدد');
+  if(k==='usa')return'حالتها في أمريكا: '+(s||'غير محدد');
+  return s||'غير محدد'
+}
+function categoryLabel(k,r){
+  let raw=k==='l500'?field(r,['category_code']):k==='l248'?field(r,['main_uses_code']):'';
+  if(!raw)return'';
+  let parts=raw.split(/[+,/]/).map(x=>x.trim().toUpperCase()).filter(Boolean);
+  return parts.map(p=>CATMAP[p]||p).join('، ')
+}
+function nameOf(r){return field(r,['active ingredient','active substance','المادة الفعالة','common name','common_name','الاسم الشائع'])||''}
+function casOf(r){return field(r,['cas','cas number','cas_no','cas_number','رقم cas'])}
+function casPerSource(all){
+  let out=[];
+  for(const k of['l248','l500','eu','usa']){let m=all.find(x=>x.k===k);if(m){let c=casOf(m.r);if(c)out.push([k,c])}}
+  return out
+}
+function categoryInfo(all){
+  for(const k of['l500','l248']){let m=all.find(x=>x.k===k);if(m){let c=categoryLabel(k,m.r);if(c)return c}}
+  return''
+}
+function adviceFor(color){
+  if(color==='red')return'توقف عن الاستخدام واستشر مهندسًا زراعيًا';
+  if(color==='amber')return'استخدم فقط وفق الشروط والقيود الرسمية، وتحت إشراف مختص';
+  if(color==='green')return'الاستخدام مسموح به وفق التعليمات المرفقة بالمنتج';
+  return'راجع مهندسًا زراعيًا للتأكد قبل الاستخدام'
+}
+function iconFor(color){return color==='red'?'⛔':color==='amber'?'⚠️':color==='green'?'✅':'ℹ️'}
+function wordFor(color){return color==='red'?'محظور':color==='amber'?'مقيد':color==='green'?'مسموح':'غير مؤكد'}
+
+function render(bodyEl,wrapEl,q,all){
+  wrapEl.classList.remove('hidden');
+  if(!all.length){
+    bodyEl.innerHTML='<div class="card"><div class="notice"><b>لم يتم العثور على تطابق موثوق بدرجة 80% أو أعلى.</b><br>تم رفض جميع النتائج الأقل من 80%. عدم العثور على نتيجة لا يعني السماح.</div></div>';
+    return
+  }
+  let top=all[0],color=statusColor(top.k,top.r);
+  vibrateFor(color);
+  bodyEl.innerHTML = simple ? renderSimple(top,color,all) : renderPro(top,color,all,q)
+}
+function vibrateFor(color){
+  try{
+    if(!navigator.vibrate)return;
+    if(color==='red')navigator.vibrate([120,80,120,80,200]);
+    else if(color==='amber')navigator.vibrate([150,100,150]);
+    else if(color==='green')navigator.vibrate(80);
+    else navigator.vibrate(40)
+  }catch(e){}
+}
+function renderSimple(top,color,all){
+  let name=nameOf(top.r)||'—';
+  let phrase=statusPhrase(top.k,top.r);
+  let cat=categoryInfo(all);
+  let advice=adviceFor(color);
+  return '<div class="simplecard" style="border-color:'+shadeFor(top.k,color)+'">'
+    +'<span class="icon">'+iconFor(color)+'</span>'
+    +'<div class="word">'+wordFor(color)+'</div>'
+    +'<div class="phrase">'+esc(name)+'<br>'+esc(phrase)+'</div>'
+    +(cat?'<div class="cat-pill">🧪 النوع: '+esc(cat)+'</div>':'')
+    +'<div class="advice"><b>💡 ماذا أفعل؟</b>'+esc(advice)+'</div>'
+    +'</div>'
+}
+function renderPro(top,color,all,q){
+  let name=nameOf(top.r)||q;
+  let cat=categoryInfo(all);
+  let cases=casPerSource(all);
+  let h='<div class="card bigresult" style="border-color:'+shadeFor(top.k,color)+'">'
+    +'<div class="biglabel" style="background:'+shadeFor(top.k,color)+';color:#04140b">'+iconFor(color)+' '+wordFor(color)+'</div>'
+    +'<h2>'+esc(name)+'</h2>'
+    +'<div class="bigscore">'+(top.s.ec?'تطابق تام برقم CAS':'أقرب تطابق بالاسم')+' — نسبة التشابه '+top.s.score+'%</div>'
+    +'<div class="meta">'+esc(statusPhrase(top.k,top.r))+(cat?'<br>🧪 النوع: '+esc(cat):'')+'</div>';
+  if(cases.length)h+='<div class="cas-list">📋 رقم CAS حسب المصدر:<br>'+cases.map(([k,c])=>CFG[k][3]+': '+esc(c)).join('<br>')+'</div>';
+  h+='</div>';
+  let others=all.slice(1);
+  if(others.length){
+    h+='<button class="more-toggle" onclick="document.getElementById(\'othersWrap\').classList.toggle(\'hidden\')">إظهار/إخفاء نتائج مشابهة أخرى ('+others.length+') ▾</button>';
+    h+='<div class="hidden" id="othersWrap">';
+    for(const x of others.slice(0,15)){
+      let r=x.r,c=statusColor(x.k,r),shade=shadeFor(x.k,c);
+      h+='<div class="match" style="border-right-color:'+shade+'"><div class="mtop"><b>'+esc(nameOf(r)||'غير محدد')+'</b><span class="score">'+x.s.score+'%</span></div>'
+        +'<div class="meta">المصدر: '+CFG[x.k][3]+' • '+esc(statusPhrase(x.k,r))
+        +(categoryLabel(x.k,r)?' • 🧪 '+esc(categoryLabel(x.k,r)):'')
+        +'<br class="pro-only">'+(casOf(r)?'<span class="pro-only">CAS: '+esc(casOf(r))+'</span>':'')
+        +'</div></div>'
+    }
+    h+='</div>'
+  }
+  h+='<div class="shareRow no-print"><button class="btn primary" onclick="report()">📄 تقرير</button><button class="btn" onclick="shareWhatsApp()">💬 واتساب</button><button class="btn" onclick="print()">🖨️ طباعة</button></div>';
+  return h
+}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function toggleMode(){
+  simple=!simple;
+  document.body.classList.toggle('simple',simple);
+  $('modeBtn').textContent=simple?'المحترف':'المزارع البسيط';
+  if(cur)render($('body'),$('res'),cur.q,cur.all)
+}
+function shareWhatsApp(){
+  if(!cur||!cur.all.length)return;
+  let top=cur.all[0];
+  let text='المستشار الزراعي\n'+nameOf(top.r)+'\n'+statusPhrase(top.k,top.r)+'\n'+location.href;
+  window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank')
+}
+function report(){
+  if(!cur)return;
+  let w=open('','_blank');
+  w.document.write('<html lang="ar" dir="rtl"><meta charset="utf-8"><title>تقرير المستشار الزراعي</title><style>body{font-family:Arial;max-width:850px;margin:30px auto;line-height:1.9} .x{border:1px solid #bbb;border-radius:10px;padding:12px;margin:8px 0}</style><h1>المستشار الزراعي — التقرير الفني</h1><div class="x"><b>الاستعلام:</b> '+esc(cur.q)+'<br><b>حد المطابقة:</b>80%</div>'
+    +cur.all.slice(0,20).map(x=>'<div class="x"><b>'+CFG[x.k][3]+'</b> — '+x.s.score+'%<br>'+esc(JSON.stringify(x.r))+'</div>').join('')
+    +'<p>عدم العثور على مادة في قاعدة بيانات لا يعني أنها مسموحة.</p><button onclick="print()">طباعة / PDF</button>');
+  w.document.close()
+}
+
+let logoTaps=0,logoTapTimer=null;
+$('logoTap').addEventListener('click',()=>{
+  logoTaps++;clearTimeout(logoTapTimer);logoTapTimer=setTimeout(()=>logoTaps=0,1500);
+  if(logoTaps>=5){logoTaps=0;openImport()}
+});
+function openImport(){$('modal').classList.remove('hidden')}
+function closeImport(){$('modal').classList.add('hidden')}
+
+function clearPhoto(){
+  $('photo').classList.add('hidden');$('img').src='';cam.value='';gal.value='';
+  $('ocrStatus').textContent='';$('ocrProgressWrap').classList.add('hidden');
+  $('scanRes').classList.add('hidden');$('scanBody').innerHTML='';
+  $('ocrManualWrap').classList.add('hidden');$('ocrManual').classList.add('hidden');$('ocrText').value=''
+}
+function photo(f){
+  if(!f)return;
+  $('img').src=URL.createObjectURL(f);
+  $('photo').classList.remove('hidden');
+  $('scanRes').classList.add('hidden');$('scanBody').innerHTML='';
+  $('ocrManualWrap').classList.add('hidden');
+  autoScan()
+}
+cam.onchange=e=>photo(e.target.files[0]);
+gal.onchange=e=>photo(e.target.files[0]);
+
+/* ---------- تحميل مؤجَّل لمحرك OCR: لا يُحمَّل إلا عند الحاجة الفعلية ---------- */
+let tessLoading=null;
+/* ---------- كشف تلقائي: هل ملفات OCR المحلية مرفوعة؟ (بدون كسر شيء لو غير موجودة بعد) ---------- */
+async function checkLocalTess(){
+  if(window.__tessLocal!==undefined)return window.__tessLocal;
+  try{
+    let r=await fetch('tess/tesseract.min.js',{method:'HEAD'});
+    window.__tessLocal=r.ok
+  }catch(e){window.__tessLocal=false}
+  return window.__tessLocal
+}
+async function tessOptions(){
+  let local=await checkLocalTess();
+  return local?{workerPath:'tess/worker.min.js',corePath:'tess/tesseract-core.wasm.js',langPath:'tess/'}:{}
+}
+function loadTesseract(){
+  if(window.Tesseract)return Promise.resolve();
+  if(tessLoading)return tessLoading;
+  tessLoading=checkLocalTess().then(local=>new Promise((res,rej)=>{
+    let s=document.createElement('script');
+    s.src=local?'tess/tesseract.min.js':'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+    s.onload=res;s.onerror=()=>{tessLoading=null;rej(new Error('load-failed'))};
+    document.head.appendChild(s)
+  }));
+  return tessLoading
+}
+/* معالجة سريعة عبر فلتر المتصفح الأصلي (بدون حلقة بكسل يدوية تجمّد الجهاز) */
+function preprocess(imgEl){
+  return new Promise(res=>{
+    let maxDim=1400;
+    let scale=Math.min(1.5,maxDim/Math.max(imgEl.naturalWidth,imgEl.naturalHeight)||1);
+    scale=Math.max(scale,1);
+    let cv=document.createElement('canvas');
+    cv.width=Math.round(imgEl.naturalWidth*scale);
+    cv.height=Math.round(imgEl.naturalHeight*scale);
+    let ctx=cv.getContext('2d');
+    ctx.filter='grayscale(1) contrast(1.35) brightness(1.08)';
+    ctx.drawImage(imgEl,0,0,cv.width,cv.height);
+    res(cv.toDataURL('image/jpeg',0.92))
+  })
+}
+function candidatesFromText(t){
+  let lines=t.split('\n').map(x=>x.trim()).filter(x=>x.length>1);
+  let words=t.split(/\s+/).map(x=>x.trim()).filter(x=>x.length>=4);
+  return[...new Set([...lines,...words,t.trim()])].filter(Boolean)
+}
+function withTimeout(promise,ms,label){
+  return Promise.race([
+    promise,
+    new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout:'+label)),ms))
+  ])
+}
+async function autoScan(){
+  // فحص فوري: لو الملفات محلية (بعد رفعها) يشتغل أوفلاين كامل، وإلا يحتاج إنترنت للتحميل الأول
+  let hasLocalTess=await checkLocalTess();
+  if(!navigator.onLine&&!hasLocalTess){
+    $('ocrStatus').textContent='⚪ لا يوجد اتصال بالإنترنت الآن. التعرف البصري يحتاج إنترنت لتحميل محرك القراءة أول مرة. تقدر تبحث بالاسم يدويًا (يعمل أوفلاين بالكامل دائمًا).';
+    $('ocrManualWrap').classList.remove('hidden');
+    return
+  }
+  $('ocrProgressWrap').classList.remove('hidden');
+  $('ocrProgressBar').style.width='0%';
+  $('ocrStatus').textContent=hasLocalTess?'جاري تحميل محرك القراءة (من التطبيق، أوفلاين)…':'جاري تحميل محرك القراءة (أول مرة فقط)…';
+  try{
+    await withTimeout(loadTesseract(),20000,'load')
+  }catch(e){
+    $('ocrProgressWrap').classList.add('hidden');
+    $('ocrStatus').textContent='تعذّر تحميل محرك القراءة خلال 20 ثانية (اتصال ضعيف أو غير متاح). جرّب لاحقًا، أو ابحث بالاسم يدويًا.';
+    $('ocrManualWrap').classList.remove('hidden');
+    return
+  }
+  $('ocrStatus').textContent='جاري تجهيز الصورة…';
+  try{
+    let processed=await preprocess($('img'));
+    let opts=await tessOptions();
+    let run=lang=>withTimeout(Tesseract.recognize(processed,lang,{...opts,logger:m=>{
+      if(m.status)$('ocrStatus').textContent=trStatus(m.status)+(m.progress?' ('+Math.round(m.progress*100)+'%)':'');
+      if(m.progress)$('ocrProgressBar').style.width=Math.round(m.progress*100)+'%'
+    }}),25000,'recognize');
+    let{data:{text}}=await run('eng');
+    let clean=text.trim();
+    if(clean.replace(/[^a-zA-Z0-9]/g,'').length<3){
+      $('ocrStatus').textContent='جاري إعادة المحاولة بلغة عربي+إنجليزي…';
+      let r2=await run('ara+eng');clean=r2.data.text.trim()
+    }
+    $('ocrProgressWrap').classList.add('hidden');
+    $('ocrText').value=clean;
+    if(!clean){
+      $('ocrStatus').textContent='لم يتم التعرف على نص واضح. جرّب صورة أقرب وأوضح، أو ابحث يدويًا.';
+      $('ocrManualWrap').classList.remove('hidden');
+      return
+    }
+    $('ocrStatus').textContent='تم التعرف — جاري البحث تلقائيًا…';
+    runAutoSearch(clean);
+    showToast('✓ تم التعرف والبحث')
+  }catch(e){
+    $('ocrProgressWrap').classList.add('hidden');
+    let msg=String(e&&e.message||'');
+    $('ocrStatus').textContent=msg.includes('timeout')
+      ?'استغرقت القراءة وقتًا طويلًا جدًا وتم إيقافها. جرّب صورة أصغر/أوضح، أو ابحث يدويًا.'
+      :'تعذّر التعرف على النص. جرّب صورة أوضح أو ابحث يدويًا.';
+    $('ocrManualWrap').classList.remove('hidden')
+  }
+}
+function trStatus(s){
+  const map={'loading tesseract core':'تحميل محرك القراءة','initializing tesseract':'تهيئة المحرك',
+    'loading language traineddata':'تحميل بيانات اللغة','initializing api':'تهيئة الواجهة',
+    'recognizing text':'جاري قراءة النص'};
+  return map[s]||s
+}
+function runAutoSearch(text){
+  let cands=candidatesFromText(text);
+  let all=[];
+  for(const c of cands)for(const k of Object.keys(DB))all.push(...rowsFor(c,k));
+  all=prioritySort(dedupe(all));
+  cur={q:'(من الصورة)',all};
+  logHist('📷 بحث بالصورة',all.length);
+  render($('scanBody'),$('scanRes'),'(من الصورة)',all);
+  $('ocrStatus').textContent=all.length?'':'لم يتم العثور على تطابق ≥80% — تقدر تعدّل النص وتبحث يدويًا.';
+  $('ocrManualWrap').classList.remove('hidden');
+  $('scanRes').scrollIntoView({behavior:'smooth'})
+}
+function searchFromManualText(){
+  let t=$('ocrText').value.trim();if(!t)return;
+  runAutoSearch(t)
+}
+
+$('files').onchange=async e=>{
+  let log='';
+  for(let f of e.target.files){
+    try{
+      let d=JSON.parse(await f.text()),r=Array.isArray(d)?d:(d.rows||d.data||[]);
+      if(!Array.isArray(r))throw Error('JSON غير صالح');
+      let n=f.name.toLowerCase(),
+          k=n.includes('248')?'l248':n.includes('500')?'l500':n.includes('eu')?'eu':(n.includes('usa')||n.includes('epa'))?'usa':null;
+      if(!k)throw Error('اسم الملف لا يحدد القاعدة');
+      DB[k]=r.map((x,i)=>({...x,__row:i+1,__source:k}));
+      log+='<div class="success">'+esc(f.name)+': تم تحميل '+r.length.toLocaleString()+' سجل.</div>'
+    }catch(x){log+='<div class="error">'+esc(f.name)+': '+esc(x.message)+'</div>'}
+  }
+  $('log').innerHTML=log;updateStats()
+};
+
+function showScreen(name,btn,focus){
+  const apply=()=>{
+    document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+    $('screen-'+name).classList.add('active');
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    if(btn)btn.classList.add('active');
+    window.scrollTo(0,0);
+    if(focus)setTimeout(()=>$('q').focus(),200);
+    if(name==='scan')acquireWakeLock();else releaseWakeLock()
+  };
+  if(document.startViewTransition)document.startViewTransition(apply);else apply()
+}
+
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('installBtn').classList.remove('hidden')});
+function installApp(){
+  if(!deferredPrompt)return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(()=>{deferredPrompt=null;$('installBtn').classList.add('hidden')})
+}
+function updateOnlineStatus(){$('netStatus').textContent=navigator.onLine?'🟢 متصل':'⚪ غير متصل (أوفلاين)'}
+window.addEventListener('online',updateOnlineStatus);
+window.addEventListener('offline',updateOnlineStatus);
+
+async function checkForUpdates(){
+  try{
+    let r=await fetch('version.json',{cache:'no-store'});
+    if(!r.ok)return;
+    let v=await r.json();
+    let last=localStorage.agriVersion;
+    if(last&&v.version&&last!==String(v.version)){$('updateBanner').classList.remove('hidden')}
+    if(v.version)localStorage.agriVersion=String(v.version)
+  }catch(e){}
+}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
+
+$('q').onkeydown=e=>{if(e.key==='Enter')doSearch()};
+updateOnlineStatus();
+maybeShowIosBanner();
+load();
+</script>
+</body>
+</html>
